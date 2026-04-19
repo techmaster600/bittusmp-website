@@ -26,7 +26,7 @@
             box-sizing: border-box;
             font-family: 'Poppins', sans-serif;
             scroll-behavior: smooth;
-            -webkit-tap-highlight-color: transparent; /* Removes blue tap highlight on mobile */
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
@@ -115,7 +115,7 @@
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
-            padding-top: 80px; /* Offset for navbar */
+            padding-top: 80px;
         }
 
         .hero::after {
@@ -218,7 +218,6 @@
             transform: scale(0.98);
         }
 
-        /* Hover effects specifically disabled for touch devices to prevent sticky hover state bugs */
         @media (hover: hover) and (pointer: fine) {
             .btn-primary:hover {
                 transform: translateY(-3px) scale(1.02);
@@ -327,6 +326,61 @@
             line-height: 1.6;
         }
 
+        /* --- VOTE CTA SECTION --- */
+        .vote-cta {
+            background: linear-gradient(135deg, rgba(10,10,10,0.8), rgba(139,0,0,0.2));
+            padding: 60px 20px;
+            text-align: center;
+            border-top: 1px solid var(--glass-border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .vote-cta h2 {
+            font-size: 2.2rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        .vote-cta p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            max-width: 600px;
+            margin: 0 auto 30px auto;
+            line-height: 1.6;
+        }
+
+        .btn-vote {
+            background: transparent;
+            color: var(--primary-red);
+            border: 2px solid var(--primary-red);
+            padding: 12px 35px;
+            font-size: 1.1rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            .btn-vote:hover {
+                background: var(--primary-red);
+                color: white;
+                box-shadow: var(--glow);
+                transform: translateY(-3px);
+            }
+        }
+
+        .btn-vote:active {
+            transform: scale(0.95);
+            background: var(--primary-red);
+            color: white;
+        }
+
         /* --- TOAST NOTIFICATION --- */
         #toast {
             visibility: hidden;
@@ -398,7 +452,7 @@
             }
 
             .nav-links.active {
-                max-height: 250px; /* Expands menu */
+                max-height: 300px; 
                 padding: 20px 0;
                 border-bottom: 1px solid var(--glass-border);
             }
@@ -413,7 +467,7 @@
             }
 
             .hero h1 {
-                font-size: 2.8rem; /* Scaled down for mobile */
+                font-size: 2.8rem;
                 margin-bottom: 15px;
             }
 
@@ -428,7 +482,7 @@
             }
 
             .btn {
-                width: 100%; /* Full width buttons on mobile */
+                width: 100%; 
                 padding: 16px 20px;
             }
 
@@ -439,7 +493,7 @@
             }
 
             .status-strip span {
-                display: none; /* Hide separators on mobile */
+                display: none; 
             }
 
             .section-title {
@@ -448,6 +502,19 @@
 
             .features {
                 padding: 60px 5%;
+            }
+
+            .vote-cta {
+                padding: 50px 20px;
+            }
+
+            .vote-cta h2 {
+                font-size: 1.8rem;
+            }
+
+            .btn-vote {
+                width: 100%;
+                padding: 14px 20px;
             }
         }
     </style>
@@ -460,6 +527,7 @@
         <div class="nav-links" id="navLinks">
             <a href="#" onclick="toggleMenu()">Home</a>
             <a href="#features" onclick="toggleMenu()">Features</a>
+            <a href="https://topg.org/minecraft-servers/server-679412" target="_blank" onclick="toggleMenu()">Vote</a>
             <a href="https://discord.gg/9jfw4jfBkA" target="_blank">Discord</a>
         </div>
     </nav>
@@ -511,6 +579,14 @@
         </div>
     </section>
 
+    <section class="vote-cta">
+        <h2>Support CrystalizedMC</h2>
+        <p>Help us grow the server! Vote daily to climb the leaderboards and instantly receive free in-game rewards, crate keys, and extra hearts.</p>
+        <a href="https://topg.org/minecraft-servers/server-679412" target="_blank" class="btn-vote">
+            🗳️ Click Here to Vote
+        </a>
+    </section>
+
     <div id="toast">✅ IP Copied: crystaltown.mcsh.io</div>
 
     <footer>
@@ -529,7 +605,6 @@
         function copyIP() {
             const ip = "crystaltown.mcsh.io";
             
-            // Modern Clipboard API
             if (navigator.clipboard && window.isSecureContext) {
                 navigator.clipboard.writeText(ip).then(showToast).catch(fallbackCopyTextToClipboard);
             } else {
@@ -542,7 +617,6 @@
             var textArea = document.createElement("textarea");
             textArea.value = text;
             
-            // Prevent scrolling to bottom of page in MS Edge.
             textArea.style.top = "0";
             textArea.style.left = "0";
             textArea.style.position = "fixed";
