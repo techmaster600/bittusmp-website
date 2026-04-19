@@ -3,402 +3,237 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>CrystalizedMC | The Ultimate Lifesteal Experience</title>
+    <title>CrystalizedMC | Premium Lifesteal Network</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,800;0,900;1,900&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800;900&display=swap');
-
-        /* --- CSS VARIABLES --- */
+        /* --- CORE VARIABLES --- */
         :root {
-            --primary-red: #ff0033;
-            --dark-red: #8b0000;
-            --bg-dark: #070707; /* Darkened slightly for better contrast */
-            --glass-bg: rgba(15, 5, 5, 0.7);
-            --glass-border: rgba(255, 0, 51, 0.3);
-            --text-main: #ffffff;
-            --text-muted: #b3b3b3;
-            --glow: 0 0 25px rgba(255, 0, 51, 0.7);
+            --red-main: #ff0033;
+            --red-dark: #8b0000;
+            --red-glow: 0 0 25px rgba(255, 0, 51, 0.6);
+            --bg-deep: #050505;
+            --bg-surface: #0a0a0a;
+            --glass-bg: rgba(15, 5, 5, 0.65);
+            --glass-border: rgba(255, 0, 51, 0.2);
+            --text-light: #ffffff;
+            --text-dim: #b3b3b3;
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
-        /* --- BASE STYLES --- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-            scroll-behavior: smooth;
-            -webkit-tap-highlight-color: transparent;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
+        
         body {
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            overflow-x: hidden;
+            background-color: var(--bg-deep); color: var(--text-light);
+            font-family: 'Poppins', sans-serif; overflow-x: hidden;
         }
 
+        h1, h2, h3, .logo { font-family: 'Montserrat', sans-serif; }
+
+        /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: var(--bg-dark); }
-        ::-webkit-scrollbar-thumb { background: var(--dark-red); border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--primary-red); }
+        ::-webkit-scrollbar-track { background: var(--bg-deep); }
+        ::-webkit-scrollbar-thumb { background: var(--red-dark); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--red-main); }
+
+        /* --- SCROLL REVEAL ANIMATION CLASS --- */
+        .reveal { opacity: 0; transform: translateY(40px); transition: 0.8s all ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
 
         /* --- NAVIGATION --- */
         nav {
-            position: fixed;
-            top: 0; width: 100%;
-            background: rgba(7, 7, 7, 0.9);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border-bottom: 1px solid var(--glass-border);
-            padding: 15px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1000;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.7);
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            background: rgba(5, 5, 5, 0.85); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--glass-border); padding: 15px 5%;
+            display: flex; justify-content: space-between; align-items: center;
         }
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .logo span {
-            color: var(--primary-red);
-            text-shadow: var(--glow);
-        }
+        .logo { font-size: 1.6rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; gap: 8px; }
+        .logo span { color: var(--red-main); text-shadow: var(--red-glow); }
 
         .nav-links { display: flex; align-items: center; }
-
         .nav-links a {
-            color: var(--text-main);
-            text-decoration: none;
-            margin-left: 30px;
-            font-weight: 600;
-            text-transform: uppercase;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-            transition: 0.3s;
+            color: var(--text-light); text-decoration: none; margin-left: 35px;
+            font-weight: 600; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px; transition: var(--transition);
         }
+        .nav-links a:hover { color: var(--red-main); text-shadow: 0 0 10px var(--red-main); }
 
-        .nav-links a:hover {
-            color: var(--primary-red);
-            text-shadow: 0 0 10px var(--primary-red);
-        }
+        .menu-toggle { display: none; font-size: 2rem; cursor: pointer; }
 
-        .menu-toggle {
-            display: none;
-            font-size: 2rem;
-            color: var(--text-main);
-            cursor: pointer;
-            line-height: 1;
-        }
-
-        /* --- HERO SECTION (VIDEO & EMBERS) --- */
+        /* --- HERO SECTION --- */
         .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            position: relative;
-            padding-top: 80px;
-            overflow: hidden;
-            background-color: #000;
+            min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; position: relative; overflow: hidden; background-color: #000; padding-top: 80px;
         }
 
         .video-bg {
-            position: absolute;
-            top: 50%; left: 50%;
-            min-width: 100%; min-height: 100%;
-            width: auto; height: auto;
-            transform: translateX(-50%) translateY(-50%);
-            z-index: 0;
-            object-fit: cover;
+            position: absolute; top: 50%; left: 50%; min-width: 100%; min-height: 100%;
+            width: auto; height: auto; transform: translateX(-50%) translateY(-50%); z-index: 0; object-fit: cover;
         }
 
-        /* Cinematic Overlay to make text pop and edges dark */
         .video-overlay {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to bottom, rgba(7,7,7,0.4) 0%, rgba(7,7,7,0.8) 70%, var(--bg-dark) 100%),
-                        radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.85) 100%);
-            z-index: 1;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(5,5,5,0.3) 0%, rgba(5,5,5,0.8) 70%, var(--bg-deep) 100%),
+                        radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.9) 100%); z-index: 1;
         }
 
-        #particles-js {
-            position: absolute;
-            width: 100%; height: 100%;
-            top: 0; left: 0;
-            z-index: 2;
-        }
+        #particles-js { position: absolute; width: 100%; height: 100%; top: 0; left: 0; z-index: 2; }
 
-        .hero-content {
-            z-index: 3;
-            padding: 0 20px;
-            width: 100%;
-            max-width: 800px;
-            animation: fadeIn 1.2s ease-out;
-        }
+        .hero-content { z-index: 3; padding: 0 20px; width: 100%; max-width: 900px; animation: heroFade 1.2s ease-out; }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes heroFade { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
         .hero-tag {
-            background: rgba(255, 0, 51, 0.15);
-            color: var(--primary-red);
-            padding: 6px 18px;
-            border-radius: 25px;
-            border: 1px solid rgba(255, 0, 51, 0.5);
-            font-weight: 800;
-            font-size: 0.85rem;
-            margin-bottom: 25px;
-            display: inline-block;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            backdrop-filter: blur(5px);
-            box-shadow: 0 0 15px rgba(255,0,51,0.2);
+            background: rgba(255, 0, 51, 0.1); color: var(--red-main); border: 1px solid rgba(255, 0, 51, 0.4);
+            padding: 6px 20px; border-radius: 30px; font-weight: 800; font-size: 0.85rem; margin-bottom: 25px;
+            display: inline-block; letter-spacing: 3px; text-transform: uppercase; backdrop-filter: blur(5px);
         }
 
-        .hero h1 {
-            font-size: 5rem;
-            font-weight: 900;
-            text-transform: uppercase;
-            line-height: 1;
-            margin-bottom: 20px;
-            text-shadow: 4px 4px 20px rgba(0,0,0,1);
-            letter-spacing: -1px;
-        }
-
+        .hero h1 { font-size: 5.5rem; font-weight: 900; text-transform: uppercase; line-height: 1; margin-bottom: 20px; text-shadow: 5px 5px 25px rgba(0,0,0,1); letter-spacing: -2px; }
         .hero h1 span {
-            background: linear-gradient(135deg, #ff6666, var(--primary-red));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: none;
-            filter: drop-shadow(0 0 15px rgba(255,0,51,0.4));
+            background: linear-gradient(to bottom right, #ff4d4d, var(--red-dark));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 15px rgba(255,0,51,0.5));
         }
 
-        .hero p {
-            font-size: 1.15rem;
-            color: #d1d1d1;
-            margin: 0 auto 40px auto;
-            text-shadow: 2px 2px 10px rgba(0,0,0,1);
-            max-width: 650px;
-        }
+        .hero p { font-size: 1.2rem; color: #dfdfdf; margin: 0 auto 40px auto; max-width: 650px; text-shadow: 2px 2px 10px rgba(0,0,0,1); font-weight: 400; }
 
-        /* --- BUTTONS --- */
-        .btn-group {
-            display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; width: 100%;
-        }
-
+        /* Buttons */
+        .btn-group { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
         .btn {
-            padding: 16px 35px; font-size: 1rem; font-weight: 800; text-transform: uppercase;
-            text-decoration: none; border-radius: 6px; cursor: pointer; transition: all 0.3s ease;
-            display: flex; align-items: center; justify-content: center; gap: 10px; border: none;
+            padding: 18px 40px; font-size: 1rem; font-weight: 800; text-transform: uppercase; text-decoration: none;
+            border-radius: 8px; cursor: pointer; transition: var(--transition); display: flex; align-items: center; gap: 10px; border: none;
         }
+        .btn-primary { background: linear-gradient(45deg, var(--red-dark), var(--red-main)); color: white; box-shadow: 0 5px 20px rgba(255, 0, 51, 0.4); border: 1px solid #ff4d4d; }
+        .btn-discord { background: rgba(255, 255, 255, 0.05); color: white; border: 1px solid rgba(255, 255, 255, 0.2); backdrop-filter: blur(5px); }
 
-        .btn-primary {
-            background: linear-gradient(45deg, var(--dark-red), var(--primary-red)); color: white;
-            box-shadow: 0 5px 20px rgba(255, 0, 51, 0.5); border: 1px solid #ff4d4d;
+        @media (hover: hover) {
+            .btn-primary:hover { transform: translateY(-5px); box-shadow: var(--red-glow); }
+            .btn-discord:hover { background: rgba(255, 255, 255, 0.1); border-color: white; transform: translateY(-5px); }
         }
-
-        .btn-primary:active { transform: scale(0.96); }
-
-        .btn-discord {
-            background: rgba(255, 255, 255, 0.05); color: white;
-            border: 1px solid rgba(255, 255, 255, 0.2); backdrop-filter: blur(5px);
-        }
-
-        .btn-discord:active { background: rgba(255, 255, 255, 0.1); transform: scale(0.96); }
-
-        @media (hover: hover) and (pointer: fine) {
-            .btn-primary:hover { transform: translateY(-4px) scale(1.02); box-shadow: var(--glow); }
-            .btn-discord:hover { background: rgba(255, 255, 255, 0.15); border-color: white; transform: translateY(-4px); }
-        }
+        .btn:active { transform: scale(0.95); }
 
         /* --- STATUS STRIP --- */
         .status-strip {
-            background: linear-gradient(90deg, var(--bg-dark), #150000, var(--bg-dark));
-            padding: 18px 10px; text-align: center; border-top: 1px solid var(--dark-red);
-            border-bottom: 1px solid var(--dark-red); font-weight: 800; letter-spacing: 1.5px;
-            color: var(--text-muted); text-transform: uppercase; font-size: 0.9rem;
-            display: flex; justify-content: center; flex-wrap: wrap; gap: 12px;
+            background: linear-gradient(90deg, var(--bg-deep), #1a0000, var(--bg-deep)); padding: 20px 10px;
+            text-align: center; border-top: 1px solid var(--red-dark); border-bottom: 1px solid var(--red-dark);
+            font-weight: 800; letter-spacing: 2px; color: var(--text-dim); text-transform: uppercase; font-size: 0.9rem;
+            display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
         }
-
-        .status-strip span { color: var(--primary-red); }
+        .status-strip span { color: var(--red-main); }
 
         /* --- FEATURES SECTION --- */
-        .features { padding: 90px 5%; text-align: center; position: relative; }
-        .section-title { font-size: 2.8rem; font-weight: 900; margin-bottom: 60px; text-transform: uppercase; text-shadow: 0 0 20px rgba(255,0,51,0.2); }
+        .section-container { padding: 100px 5%; text-align: center; position: relative; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .section-title { font-size: 3rem; font-weight: 900; margin-bottom: 20px; text-transform: uppercase; }
+        .section-subtitle { color: var(--text-dim); margin-bottom: 60px; font-size: 1.1rem; max-width: 600px; margin-left: auto; margin-right: auto; }
 
-        .grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px; max-width: 1200px; margin: 0 auto;
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; }
+
+        .feature-card {
+            background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 12px; padding: 40px 30px;
+            text-align: left; position: relative; overflow: hidden; transition: var(--transition);
         }
-
-        .card {
-            background: var(--glass-bg); border: 1px solid var(--glass-border);
-            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-            padding: 40px 25px; border-radius: 12px; text-align: left;
-            position: relative; overflow: hidden; transition: all 0.3s ease;
-        }
-
-        .card::before {
+        .feature-card::before {
             content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px;
-            background: linear-gradient(90deg, transparent, var(--primary-red), transparent);
-            transform: translateX(-100%); transition: 0.6s;
+            background: linear-gradient(90deg, transparent, var(--red-main), transparent); transform: translateX(-100%); transition: 0.6s;
+        }
+        @media (hover: hover) {
+            .feature-card:hover { border-color: var(--red-main); box-shadow: 0 10px 40px rgba(255, 0, 51, 0.15); transform: translateY(-8px); }
+            .feature-card:hover::before { transform: translateX(100%); }
         }
 
-        @media (hover: hover) and (pointer: fine) {
-            .card:hover { border-color: var(--primary-red); box-shadow: 0 10px 40px rgba(255, 0, 51, 0.15); transform: translateY(-5px); }
-            .card:hover::before { transform: translateX(100%); }
+        .feature-card .icon { font-size: 3rem; margin-bottom: 20px; display: inline-block; filter: drop-shadow(0 0 15px rgba(255,0,51,0.5)); }
+        .feature-card h3 { font-size: 1.5rem; margin-bottom: 12px; color: white; text-transform: uppercase; }
+        .feature-card p { color: var(--text-dim); line-height: 1.7; font-size: 0.95rem; }
+
+        /* --- PREMIUM STORE SECTION --- */
+        .store-bg { background: radial-gradient(circle at top, #110000 0%, var(--bg-deep) 100%); }
+        .store-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1100px; margin: 0 auto; align-items: center; }
+
+        .rank-card {
+            background: linear-gradient(145deg, rgba(15,15,15,0.9), rgba(5,5,5,0.9)); border: 1px solid #333;
+            border-radius: 15px; padding: 40px 20px; text-align: center; transition: var(--transition); position: relative;
+        }
+        
+        /* The "Bestest" Ultimate Rank Styling */
+        .rank-card.ultimate {
+            border-color: var(--red-main); background: linear-gradient(145deg, rgba(40,5,5,0.9), rgba(10,0,0,0.9));
+            transform: scale(1.05); box-shadow: 0 15px 50px rgba(255,0,51,0.2); z-index: 2;
+        }
+        
+        .rank-badge { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: var(--red-main); color: white; padding: 5px 20px; font-weight: 800; text-transform: uppercase; border-radius: 20px; font-size: 0.8rem; box-shadow: var(--red-glow); }
+        
+        .rank-card h3 { font-size: 2rem; margin-bottom: 10px; text-transform: uppercase; }
+        .rank-card.ultimate h3 { color: var(--red-main); text-shadow: var(--red-glow); }
+        
+        .rank-perks { list-style: none; margin: 30px 0; padding: 0; color: var(--text-dim); text-align: left; display: inline-block; }
+        .rank-perks li { margin-bottom: 12px; font-size: 0.9rem; }
+        .rank-perks li::before { content: '✓'; color: var(--red-main); font-weight: bold; margin-right: 10px; }
+
+        .btn-store {
+            display: block; width: 100%; padding: 15px; background: transparent; color: white; border: 2px solid #555;
+            text-transform: uppercase; font-weight: 800; border-radius: 8px; text-decoration: none; transition: var(--transition);
+        }
+        .rank-card.ultimate .btn-store { background: var(--red-main); border-color: var(--red-main); }
+        
+        @media (hover: hover) {
+            .rank-card:not(.ultimate):hover { border-color: #666; transform: translateY(-5px); }
+            .btn-store:hover { background: white; color: black; border-color: white; }
         }
 
-        .icon { font-size: 2.5rem; margin-bottom: 15px; display: inline-block; filter: drop-shadow(0 0 15px rgba(255,0,51,0.6)); }
-        .card h3 { font-size: 1.4rem; margin-bottom: 12px; color: white; text-transform: uppercase; font-weight: 800; }
-        .card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; }
-
-        /* --- MARKETPLACE (STORE) SECTION --- */
-        .store-section {
-            padding: 90px 5%;
-            background: radial-gradient(circle at top, #120000 0%, var(--bg-dark) 80%);
-            border-top: 1px solid var(--glass-border);
-            text-align: center;
-        }
-
-        .store-grid {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .store-card {
-            background: linear-gradient(145deg, rgba(30,5,5,0.8), rgba(10,5,5,0.9));
-            border: 1px solid var(--dark-red);
-            padding: 50px 30px;
-            border-radius: 15px;
-            width: 100%;
-            max-width: 380px;
-            position: relative;
-            overflow: hidden;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            transition: all 0.3s ease;
-        }
-
-        /* The Diagonal "UPCOMING" Ribbon */
-        .upcoming-ribbon {
-            position: absolute;
-            top: 25px; right: -40px;
-            background: var(--primary-red);
-            color: white;
-            padding: 8px 45px;
-            font-size: 0.85rem;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            transform: rotate(45deg);
-            box-shadow: 0 5px 15px rgba(255,0,51,0.6);
-            z-index: 2;
-        }
-
-        .store-card:hover {
-            border-color: var(--primary-red);
-            box-shadow: var(--glow);
-            transform: translateY(-8px);
-        }
-
-        .store-card .icon { font-size: 3.5rem; margin-bottom: 20px; }
-        .store-card h3 { font-size: 1.8rem; color: white; margin-bottom: 15px; font-weight: 900; text-transform: uppercase;}
-        .store-card p { color: #aaa; font-size: 1rem; line-height: 1.6; margin-bottom: 25px;}
-
-        .btn-store-disabled {
-            background: transparent; color: #666; border: 2px solid #444;
-            padding: 12px 30px; font-size: 1rem; font-weight: 800; text-transform: uppercase;
-            border-radius: 5px; display: inline-block; cursor: not-allowed;
-        }
-
-        /* --- COMMUNITY & DISCORD WIDGET SECTION --- */
-        .community-section {
-            padding: 90px 5%; border-top: 1px solid var(--glass-border);
-            display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 60px;
-        }
-
-        .community-text { max-width: 500px; }
-        .community-text h2 { font-size: 2.8rem; font-weight: 900; text-transform: uppercase; margin-bottom: 20px; color: white; }
-        .community-text p { color: var(--text-muted); font-size: 1.05rem; line-height: 1.7; margin-bottom: 30px; }
-
-        .discord-widget {
-            background: rgba(0, 0, 0, 0.6); padding: 10px; border-radius: 12px;
-            border: 1px solid rgba(255,255,255,0.05); box-shadow: 0 15px 40px rgba(0,0,0,0.9);
-        }
-
-        /* --- VOTE CTA SECTION --- */
-        .vote-cta {
-            background: linear-gradient(135deg, rgba(7,7,7,0.9), rgba(139,0,0,0.4));
-            padding: 70px 20px; text-align: center; border-top: 1px solid var(--glass-border);
-        }
-
-        .vote-cta h2 { font-size: 2.5rem; font-weight: 900; text-transform: uppercase; margin-bottom: 20px; color: white; }
-        .vote-cta p { color: #ccc; font-size: 1.05rem; max-width: 650px; margin: 0 auto 35px auto; line-height: 1.7; }
-
+        /* --- COMMUNITY & SUPPORT --- */
+        .community-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; max-width: 1200px; margin: 0 auto; align-items: center; }
+        .support-box { background: rgba(255,0,51,0.05); border: 1px solid var(--glass-border); padding: 40px; border-radius: 12px; text-align: left; }
+        .support-box h2 { font-size: 2.2rem; margin-bottom: 15px; color: white; }
+        .support-box p { color: var(--text-dim); line-height: 1.7; margin-bottom: 25px; }
+        .discord-widget { background: rgba(0,0,0,0.8); padding: 10px; border-radius: 12px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+        
+        /* --- VOTE CTA --- */
+        .vote-cta { background: linear-gradient(135deg, var(--bg-surface), rgba(139,0,0,0.3)); text-align: center; }
         .btn-vote {
-            background: transparent; color: var(--primary-red); border: 2px solid var(--primary-red);
-            padding: 15px 40px; font-size: 1.1rem; font-weight: 800; text-transform: uppercase;
-            text-decoration: none; border-radius: 5px; transition: all 0.3s; display: inline-block;
+            background: transparent; color: var(--red-main); border: 2px solid var(--red-main);
+            padding: 16px 45px; font-size: 1.1rem; font-weight: 800; text-transform: uppercase;
+            text-decoration: none; border-radius: 8px; transition: var(--transition); display: inline-block;
         }
+        @media (hover: hover) { .btn-vote:hover { background: var(--red-main); color: white; box-shadow: var(--red-glow); transform: translateY(-4px); } }
 
-        @media (hover: hover) and (pointer: fine) {
-            .btn-vote:hover { background: var(--primary-red); color: white; box-shadow: var(--glow); transform: translateY(-4px); }
-        }
-
-        /* --- TOAST NOTIFICATION --- */
+        /* --- TOAST --- */
         #toast {
-            visibility: hidden; width: 90%; max-width: 350px; background-color: var(--primary-red);
-            color: #fff; text-align: center; border-radius: 8px; padding: 15px; position: fixed;
-            z-index: 9999; left: 50%; bottom: 20px; transform: translateX(-50%); font-weight: bold;
-            box-shadow: var(--glow); opacity: 0; transition: opacity 0.3s, bottom 0.3s; font-size: 0.95rem;
+            visibility: hidden; width: 90%; max-width: 380px; background-color: var(--red-main); color: white;
+            text-align: center; border-radius: 8px; padding: 18px; position: fixed; z-index: 9999; left: 50%;
+            bottom: -50px; transform: translateX(-50%); font-weight: 800; box-shadow: var(--red-glow);
+            opacity: 0; transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55); font-size: 1rem;
         }
-        #toast.show { visibility: visible; opacity: 1; bottom: 30px; }
+        #toast.show { visibility: visible; opacity: 1; bottom: 40px; }
 
         /* --- FOOTER --- */
-        footer { background: #030303; padding: 40px 20px; text-align: center; border-top: 1px solid #1a1a1a; }
-        .footer-logo { font-size: 1.3rem; font-weight: 900; margin-bottom: 12px; color: #555; letter-spacing: 2px; }
-        .footer-text { color: #444; font-size: 0.85rem; line-height: 1.6; }
+        footer { background: #020202; padding: 50px 20px; text-align: center; border-top: 1px solid #111; }
+        .footer-logo { font-size: 1.5rem; font-weight: 900; margin-bottom: 15px; color: #444; letter-spacing: 2px; }
+        .footer-text { color: #555; font-size: 0.85rem; line-height: 1.6; }
 
-        /* --- MOBILE RESPONSIVE MEDIA QUERIES --- */
+        /* --- MOBILE RESPONSIVE --- */
+        @media screen and (max-width: 992px) {
+            .community-grid { grid-template-columns: 1fr; }
+            .rank-card.ultimate { transform: scale(1); }
+        }
         @media screen and (max-width: 768px) {
             .menu-toggle { display: block; }
             .nav-links {
-                position: absolute; top: 100%; left: 0; width: 100%; background: rgba(7, 7, 7, 0.98);
-                flex-direction: column; align-items: center; padding: 0; max-height: 0; overflow: hidden;
-                transition: max-height 0.3s ease-out; border-bottom: 1px solid transparent;
+                position: absolute; top: 100%; left: 0; width: 100%; background: rgba(5,5,5,0.98);
+                flex-direction: column; padding: 0; max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; border-bottom: 1px solid transparent;
             }
-            .nav-links.active { max-height: 350px; padding: 20px 0; border-bottom: 1px solid var(--glass-border); }
+            .nav-links.active { max-height: 400px; padding: 20px 0; border-bottom: 1px solid var(--glass-border); }
             .nav-links a { margin: 15px 0; font-size: 1.1rem; }
             
-            .hero h1 { font-size: 3rem; margin-bottom: 15px; }
-            .btn-group { flex-direction: column; gap: 12px; }
-            .btn { width: 100%; padding: 16px 20px; }
-            
+            .hero h1 { font-size: 3.5rem; }
+            .btn-group { flex-direction: column; width: 100%; gap: 15px; }
+            .btn { width: 100%; justify-content: center; }
             .status-strip span { display: none; }
+            
             .section-title { font-size: 2.2rem; }
-            
-            .community-section { text-align: center; padding: 60px 5%; gap: 40px;}
-            .community-text h2 { font-size: 2.2rem; }
-            .discord-widget iframe { width: 100%; max-width: 350px; }
-            
-            .vote-cta h2 { font-size: 2rem; }
-            .btn-vote { width: 100%; }
+            .discord-widget iframe { width: 100%; }
         }
     </style>
 </head>
@@ -411,7 +246,7 @@
             <a href="#" onclick="toggleMenu()">Home</a>
             <a href="#features" onclick="toggleMenu()">Features</a>
             <a href="#store" onclick="toggleMenu()">Store</a>
-            <a href="#community" onclick="toggleMenu()">Community</a>
+            <a href="#community" onclick="toggleMenu()">Support</a>
             <a href="https://topg.org/minecraft-servers/server-679412" target="_blank" onclick="toggleMenu()">Vote</a>
         </div>
     </nav>
@@ -424,161 +259,198 @@
         <div id="particles-js"></div>
 
         <div class="hero-content">
-            <div class="hero-tag">Season 1 is Live</div>
+            <div class="hero-tag">Season 1 is Officially Live</div>
             <h1>Steal Hearts.<br><span>Survive.</span></h1>
-            <p>Welcome to the most ruthless Lifesteal SMP. Build your empire, wage war, and collect the hearts of your fallen enemies. Trust no one.</p>
+            <p>The most ruthless, highly-optimized Lifesteal SMP. Build an unraidable empire, dominate the economy, and collect the hearts of your fallen enemies. Trust no one.</p>
             
             <div class="btn-group">
                 <button class="btn btn-primary" onclick="copyIP()">
                     🎮 crystaltown.mcsh.io
                 </button>
                 <a href="https://discord.gg/9jfw4jfBkA" target="_blank" class="btn btn-discord">
-                    💬 Join Discord
+                    💬 Join the Discord
                 </a>
             </div>
         </div>
     </section>
 
     <div class="status-strip">
-        Premium Lifesteal <span>|</span> Custom PvP <span>|</span> No Claims <span>|</span> 24/7 Uptime
+        Premium Anti-Cheat <span>|</span> Daily Keyalls <span>|</span> Flawless PvP <span>|</span> Zero Lag
     </div>
 
-    <section id="features" class="features">
-        <h2 class="section-title">Server Features</h2>
-        <div class="grid">
-            <div class="card">
+    <section id="features" class="section-container">
+        <h2 class="section-title reveal">Why Play Here?</h2>
+        <p class="section-subtitle reveal">We completely rebuilt the standard SMP experience from the ground up to provide the ultimate competitive environment.</p>
+        
+        <div class="features-grid">
+            <div class="feature-card reveal">
                 <div class="icon">🩸</div>
                 <h3>Lifesteal Core</h3>
-                <p>Every kill grants you a heart, and every death takes one away. Reach maximum health to become unstoppable, or face a ban if you lose your last heart.</p>
+                <p>Every kill grants you a heart; every death steals one. Reach max health to become a juggernaut, or risk a ban if you hit zero.</p>
             </div>
-            <div class="card">
+            <div class="feature-card reveal">
+                <div class="icon">🛡️</div>
+                <h3>Premium Anti-Cheat</h3>
+                <p>Zero tolerance for hackers. Our custom-configured, enterprise-grade anti-cheat ensures flawless hit registration and a perfectly fair playing field.</p>
+            </div>
+            <div class="feature-card reveal">
+                <div class="icon">🎁</div>
+                <h3>Daily Keyalls</h3>
+                <p>We reward active players. Log in daily to receive server-wide Keyalls. Unlock epic crates for top-tier weapons, armor, and extra hearts.</p>
+            </div>
+            <div class="feature-card reveal">
                 <div class="icon">⚔️</div>
-                <h3>Flawless Combat</h3>
-                <p>Our server runs on highly optimized hardware to ensure hit registration is perfect. No lag spikes when you are in the middle of an intense fight.</p>
+                <h3>Optimized Combat</h3>
+                <p>Hosted on high-frequency processors. Experience completely lag-free PvP with custom knockback tuning and smooth end-crystal combat.</p>
             </div>
-            <div class="card">
+            <div class="feature-card reveal">
                 <div class="icon">💣</div>
                 <h3>Raid & Grief</h3>
-                <p>There are no land claims. Hide your base thousands of blocks away, set up redstone traps, and raid your enemies for their hard-earned loot.</p>
+                <p>No land claims. No safety nets. Hide your base thousands of blocks out, craft deadly redstone traps, and raid enemies for their loot.</p>
             </div>
-            <div class="card">
+            <div class="feature-card reveal">
                 <div class="icon">🛒</div>
                 <h3>Player Economy</h3>
-                <p>Trade your items, hearts, and gear safely with other players using our custom auction house and secure trading menus.</p>
+                <p>Dominate the market. Trade items, hearts, and bounties safely using our advanced Auction House and secure player-to-player trading GUI.</p>
             </div>
         </div>
     </section>
 
-    <section id="store" class="store-section">
-        <h2 class="section-title">Server Store</h2>
+    <section id="store" class="section-container store-bg">
+        <h2 class="section-title reveal">Global Ranks</h2>
+        <p class="section-subtitle reveal">Support the server development and unlock massive ingame advantages. (Coming Soon)</p>
+
         <div class="store-grid">
-            
-            <div class="store-card">
-                <div class="upcoming-ribbon">Upcoming</div>
-                <div class="icon">👑</div>
-                <h3>Global Ranks</h3>
-                <p>Dominate the chat and the battlefield. Unlock premium perks, custom red prefixes, exclusive kits, and priority queue bypassing.</p>
-                <div class="btn-store-disabled">Coming Soon</div>
+            <div class="rank-card reveal">
+                <h3>Warrior</h3>
+                <ul class="rank-perks">
+                    <li>Custom Chat Prefix</li>
+                    <li>Access to /nick</li>
+                    <li>3x Sethomes</li>
+                    <li>Weekly Warrior Kit</li>
+                </ul>
+                <a href="#" class="btn-store">View Store</a>
             </div>
 
-            <div class="store-card">
-                <div class="upcoming-ribbon">Upcoming</div>
-                <div class="icon">🗝️</div>
-                <h3>Crate Keys</h3>
-                <p>Test your luck at spawn! Win god-tier armor sets, rare weapons, extra life hearts, and exclusive cosmetics.</p>
-                <div class="btn-store-disabled">Coming Soon</div>
+            <div class="rank-card ultimate reveal">
+                <div class="rank-badge">Most Popular</div>
+                <h3>Crystal</h3>
+                <ul class="rank-perks">
+                    <li>Glowing Red Chat Name</li>
+                    <li>Priority Queue Bypass</li>
+                    <li>10x Sethomes & /feed</li>
+                    <li>Daily Crystal Crate Keys</li>
+                    <li>Keep XP on Death</li>
+                </ul>
+                <a href="#" class="btn-store">View Store</a>
             </div>
 
+            <div class="rank-card reveal">
+                <h3>Assassin</h3>
+                <ul class="rank-perks">
+                    <li>Custom Chat Prefix</li>
+                    <li>Access to /hat & /craft</li>
+                    <li>5x Sethomes</li>
+                    <li>Weekly Assassin Kit</li>
+                </ul>
+                <a href="#" class="btn-store">View Store</a>
+            </div>
         </div>
     </section>
 
-    <section id="community" class="community-section">
-        <div class="community-text">
-            <h2>Join the Army</h2>
-            <p>CrystalizedMC isn't just a server; it's an active, thriving community of builders, fighters, and survivors. Join our Discord to find teammates, report rule-breakers, and stay updated on the latest giveaways and server events.</p>
-            <a href="https://discord.gg/9jfw4jfBkA" target="_blank" class="btn btn-discord" style="width: fit-content; border-color: var(--primary-red); color: white;">
-                Join the Discord
+    <section id="community" class="section-container">
+        <div class="community-grid">
+            <div class="support-box reveal">
+                <h2>24/7 Active Support</h2>
+                <p>Found a bug? Encountered a rule-breaker? Have an issue with a store purchase? Our dedicated staff team is active around the clock to ensure your experience is flawless.</p>
+                <p>Join the Discord, navigate to the <strong>#support</strong> channel, and open a ticket. We typically respond within minutes.</p>
+                <a href="https://discord.gg/9jfw4jfBkA" target="_blank" class="btn btn-primary" style="width: fit-content; margin-top: 10px;">Open a Ticket</a>
+            </div>
+            
+            <div class="discord-widget reveal">
+                <iframe src="https://discord.com/widget?id=1479029718799089768&theme=dark" width="100%" height="400" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-container vote-cta">
+        <h2 class="reveal">Boost the Server</h2>
+        <p class="reveal">The more players we have, the more blood is shed. Vote for CrystalizedMC daily to boost our ranking and instantly receive free Crate Keys and Rewards ingame!</p>
+        <div class="reveal">
+            <a href="https://topg.org/minecraft-servers/server-679412" target="_blank" class="btn-vote">
+                🗳️ Click Here to Vote
             </a>
         </div>
-        
-        <div class="discord-widget">
-            <iframe src="https://discord.com/widget?id=1479029718799089768&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
-        </div>
     </section>
 
-    <section class="vote-cta">
-        <h2>Support CrystalizedMC</h2>
-        <p>Help us grow the server! Vote daily to climb the leaderboards and instantly receive free in-game rewards, crate keys, and extra hearts.</p>
-        <a href="https://topg.org/minecraft-servers/server-679412" target="_blank" class="btn-vote">
-            🗳️ Click Here to Vote
-        </a>
-    </section>
-
-    <div id="toast">✅ IP Copied: crystaltown.mcsh.io</div>
+    <div id="toast">✅ IP COPIED: crystaltown.mcsh.io</div>
 
     <footer>
         <div class="footer-logo">CRYSTALIZEDMC</div>
-        <p class="footer-text">&copy; 2026 CrystalizedMC Network. All rights reserved.<br>Not affiliated with Mojang AB.</p>
+        <p class="footer-text">&copy; 2026 CrystalizedMC Network. All rights reserved.<br>Not affiliated with or endorsed by Mojang AB.</p>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <script>
-        // Initializing particles to look like rising fire embers
+        // Embers Particles
         particlesJS('particles-js', {
             "particles": {
-                "number": { "value": 75, "density": { "enable": true, "value_area": 800 } },
-                "color": { "value": ["#ff0033", "#ff6600", "#ffcc00"] }, // Fire colors
+                "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": ["#ff0033", "#ff4d4d", "#ff1a1a"] },
                 "shape": { "type": "circle" },
-                "opacity": { "value": 0.6, "random": true, "anim": { "enable": true, "speed": 1, "opacity_min": 0.1, "sync": false } },
+                "opacity": { "value": 0.7, "random": true, "anim": { "enable": true, "speed": 1, "opacity_min": 0.1, "sync": false } },
                 "size": { "value": 3, "random": true, "anim": { "enable": true, "speed": 2, "size_min": 0.1, "sync": false } },
                 "line_linked": { "enable": false },
-                "move": {
-                    "enable": true, "speed": 1.2, "direction": "top", "random": true,
-                    "straight": false, "out_mode": "out", "bounce": false
-                }
+                "move": { "enable": true, "speed": 1.5, "direction": "top", "random": true, "straight": false, "out_mode": "out", "bounce": false }
             },
             "interactivity": {
                 "detect_on": "canvas",
                 "events": { "onhover": { "enable": true, "mode": "bubble" }, "onclick": { "enable": true, "mode": "push" }, "resize": true },
-                "modes": { "bubble": { "distance": 150, "size": 6, "duration": 2, "opacity": 1, "speed": 3 }, "push": { "particles_nb": 4 } }
+                "modes": { "bubble": { "distance": 150, "size": 5, "duration": 2, "opacity": 1, "speed": 3 }, "push": { "particles_nb": 4 } }
             },
             "retina_detect": true
         });
 
-        // Mobile Menu Toggle Logic
-        function toggleMenu() {
-            const navLinks = document.getElementById("navLinks");
-            navLinks.classList.toggle("active");
-        }
+        // Mobile Menu
+        function toggleMenu() { document.getElementById("navLinks").classList.toggle("active"); }
 
-        // Copy IP Logic
+        // Copy IP
         function copyIP() {
             const ip = "crystaltown.mcsh.io";
             if (navigator.clipboard && window.isSecureContext) {
                 navigator.clipboard.writeText(ip).then(showToast).catch(fallbackCopyTextToClipboard);
-            } else {
-                fallbackCopyTextToClipboard(ip);
-            }
+            } else { fallbackCopyTextToClipboard(ip); }
         }
 
         function fallbackCopyTextToClipboard(text) {
-            var textArea = document.createElement("textarea");
-            textArea.value = text;
+            var textArea = document.createElement("textarea"); textArea.value = text;
             textArea.style.top = "0"; textArea.style.left = "0"; textArea.style.position = "fixed";
-            document.body.appendChild(textArea);
-            textArea.focus(); textArea.select();
-            try {
-                var successful = document.execCommand('copy');
-                if (successful) showToast();
-            } catch (err) {}
+            document.body.appendChild(textArea); textArea.focus(); textArea.select();
+            try { if(document.execCommand('copy')) showToast(); } catch (err) {}
             document.body.removeChild(textArea);
         }
 
         function showToast() {
             const toast = document.getElementById("toast");
-            toast.className = "show";
-            setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
+            toast.classList.add("show");
+            setTimeout(() => { toast.classList.remove("show"); }, 3000);
         }
+
+        // SCROLL REVEAL ANIMATION (Intersection Observer)
+        document.addEventListener("DOMContentLoaded", () => {
+            const reveals = document.querySelectorAll(".reveal");
+            const revealOptions = { threshold: 0.15, rootMargin: "0px 0px -50px 0px" };
+            
+            const revealOnScroll = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) return;
+                    entry.target.classList.add("active");
+                    observer.unobserve(entry.target); // Run once per element
+                });
+            }, revealOptions);
+
+            reveals.forEach(reveal => { revealOnScroll.observe(reveal); });
+        });
     </script>
 </body>
 </html>
