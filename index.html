@@ -12,8 +12,8 @@
             --primary-red: #ff0033;
             --dark-red: #8b0000;
             --bg-dark: #0a0a0a;
-            --glass-bg: rgba(20, 10, 10, 0.6);
-            --glass-border: rgba(255, 0, 51, 0.2);
+            --glass-bg: rgba(20, 10, 10, 0.65);
+            --glass-border: rgba(255, 0, 51, 0.25);
             --text-main: #ffffff;
             --text-muted: #b3b3b3;
             --glow: 0 0 20px rgba(255, 0, 51, 0.6);
@@ -35,7 +35,6 @@
             overflow-x: hidden;
         }
 
-        /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: var(--bg-dark); }
         ::-webkit-scrollbar-thumb { background: var(--dark-red); border-radius: 4px; }
@@ -45,15 +44,16 @@
         nav {
             position: fixed;
             top: 0; width: 100%;
-            background: rgba(10, 10, 10, 0.9);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--glass-border);
             padding: 15px 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
         }
 
         .logo {
@@ -71,10 +71,7 @@
             text-shadow: var(--glow);
         }
 
-        .nav-links {
-            display: flex;
-            align-items: center;
-        }
+        .nav-links { display: flex; align-items: center; }
 
         .nav-links a {
             color: var(--text-main);
@@ -92,7 +89,6 @@
             text-shadow: 0 0 10px var(--primary-red);
         }
 
-        /* Mobile Menu Toggle */
         .menu-toggle {
             display: none;
             font-size: 2rem;
@@ -101,7 +97,7 @@
             line-height: 1;
         }
 
-        /* --- HERO SECTION --- */
+        /* --- HERO SECTION (VIDEO & PARTICLES) --- */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -110,12 +106,34 @@
             align-items: center;
             text-align: center;
             position: relative;
-            background: linear-gradient(to bottom, rgba(10,10,10,0.5), var(--bg-dark)),
-                        url('https://images.unsplash.com/photo-1628155930542-3c7a64e2c848?q=80&w=1920&auto=format&fit=crop');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
             padding-top: 80px;
+            overflow: hidden;
+            background-color: #000;
+        }
+
+        /* Video Background */
+        .video-bg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translateX(-50%) translateY(-50%);
+            z-index: 0;
+            opacity: 0.4;
+            object-fit: cover;
+        }
+
+        /* Particles Layer */
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
         }
 
         .hero::after {
@@ -123,18 +141,25 @@
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
             background: radial-gradient(circle at center, transparent 0%, var(--bg-dark) 100%);
+            z-index: 2;
             pointer-events: none;
         }
 
         .hero-content {
-            z-index: 2;
+            z-index: 3;
             padding: 0 20px;
             width: 100%;
             max-width: 800px;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .hero-tag {
-            background: rgba(255, 0, 51, 0.1);
+            background: rgba(255, 0, 51, 0.15);
             color: var(--primary-red);
             padding: 5px 15px;
             border-radius: 20px;
@@ -145,6 +170,7 @@
             display: inline-block;
             letter-spacing: 2px;
             text-transform: uppercase;
+            backdrop-filter: blur(4px);
         }
 
         .hero h1 {
@@ -153,7 +179,7 @@
             text-transform: uppercase;
             line-height: 1.1;
             margin-bottom: 20px;
-            text-shadow: 4px 4px 15px rgba(0,0,0,0.8);
+            text-shadow: 4px 4px 20px rgba(0,0,0,0.9);
         }
 
         .hero h1 span {
@@ -165,8 +191,9 @@
 
         .hero p {
             font-size: 1.1rem;
-            color: var(--text-muted);
+            color: #e0e0e0;
             margin: 0 auto 40px auto;
+            text-shadow: 1px 1px 5px rgba(0,0,0,0.8);
         }
 
         /* --- BUTTONS --- */
@@ -192,7 +219,6 @@
             justify-content: center;
             gap: 10px;
             border: none;
-            width: auto;
         }
 
         .btn-primary {
@@ -202,9 +228,7 @@
             border: 1px solid #ff4d4d;
         }
 
-        .btn-primary:active {
-            transform: scale(0.98);
-        }
+        .btn-primary:active { transform: scale(0.98); }
 
         .btn-discord {
             background: rgba(255, 255, 255, 0.05);
@@ -213,21 +237,11 @@
             backdrop-filter: blur(5px);
         }
 
-        .btn-discord:active {
-            background: rgba(255, 255, 255, 0.1);
-            transform: scale(0.98);
-        }
+        .btn-discord:active { background: rgba(255, 255, 255, 0.1); transform: scale(0.98); }
 
         @media (hover: hover) and (pointer: fine) {
-            .btn-primary:hover {
-                transform: translateY(-3px) scale(1.02);
-                box-shadow: var(--glow);
-            }
-            .btn-discord:hover {
-                background: rgba(255, 255, 255, 0.1);
-                border-color: white;
-                transform: translateY(-3px);
-            }
+            .btn-primary:hover { transform: translateY(-3px) scale(1.02); box-shadow: var(--glow); }
+            .btn-discord:hover { background: rgba(255, 255, 255, 0.15); border-color: white; transform: translateY(-3px); }
         }
 
         /* --- STATUS STRIP --- */
@@ -248,24 +262,11 @@
             gap: 10px;
         }
 
-        .status-strip span {
-            color: var(--primary-red);
-            display: inline-block;
-        }
+        .status-strip span { color: var(--primary-red); }
 
         /* --- FEATURES SECTION --- */
-        .features {
-            padding: 80px 5%;
-            text-align: center;
-            position: relative;
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 900;
-            margin-bottom: 50px;
-            text-transform: uppercase;
-        }
+        .features { padding: 80px 5%; text-align: center; position: relative; }
+        .section-title { font-size: 2.5rem; font-weight: 900; margin-bottom: 50px; text-transform: uppercase; }
 
         .grid {
             display: grid;
@@ -285,50 +286,67 @@
             text-align: left;
             position: relative;
             overflow: hidden;
-            transition: border-color 0.3s ease;
+            transition: all 0.3s ease;
         }
 
         .card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 3px;
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px;
             background: linear-gradient(90deg, transparent, var(--primary-red), transparent);
-            transform: translateX(-100%);
-            transition: 0.5s;
+            transform: translateX(-100%); transition: 0.5s;
         }
 
         @media (hover: hover) and (pointer: fine) {
-            .card:hover {
-                border-color: var(--primary-red);
-                box-shadow: 0 10px 30px rgba(255, 0, 51, 0.15);
-            }
-            .card:hover::before {
-                transform: translateX(100%);
-            }
+            .card:hover { border-color: var(--primary-red); box-shadow: 0 10px 30px rgba(255, 0, 51, 0.15); transform: translateY(-5px); }
+            .card:hover::before { transform: translateX(100%); }
         }
 
-        .icon {
+        .icon { font-size: 2.5rem; margin-bottom: 15px; display: inline-block; filter: drop-shadow(0 0 10px rgba(255,0,51,0.5)); }
+        .card h3 { font-size: 1.3rem; margin-bottom: 10px; color: white; }
+        .card p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; }
+
+        /* --- COMMUNITY & DISCORD WIDGET SECTION --- */
+        .community-section {
+            padding: 80px 5%;
+            background: radial-gradient(circle at center, #110000 0%, var(--bg-dark) 100%);
+            border-top: 1px solid var(--glass-border);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 50px;
+            text-align: left;
+        }
+
+        .community-text {
+            max-width: 500px;
+        }
+
+        .community-text h2 {
             font-size: 2.5rem;
+            font-weight: 900;
+            text-transform: uppercase;
             margin-bottom: 15px;
-            display: inline-block;
-            filter: drop-shadow(0 0 10px rgba(255,0,51,0.5));
-        }
-
-        .card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 10px;
             color: white;
         }
 
-        .card p {
+        .community-text p {
             color: var(--text-muted);
-            font-size: 0.9rem;
+            font-size: 1rem;
             line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .discord-widget {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
         }
 
         /* --- VOTE CTA SECTION --- */
         .vote-cta {
-            background: linear-gradient(135deg, rgba(10,10,10,0.8), rgba(139,0,0,0.2));
+            background: linear-gradient(135deg, rgba(10,10,10,0.8), rgba(139,0,0,0.3));
             padding: 60px 20px;
             text-align: center;
             border-top: 1px solid var(--glass-border);
@@ -336,186 +354,50 @@
             overflow: hidden;
         }
 
-        .vote-cta h2 {
-            font-size: 2.2rem;
-            font-weight: 900;
-            text-transform: uppercase;
-            margin-bottom: 15px;
-            color: white;
-        }
-
-        .vote-cta p {
-            color: var(--text-muted);
-            font-size: 1rem;
-            max-width: 600px;
-            margin: 0 auto 30px auto;
-            line-height: 1.6;
-        }
+        .vote-cta h2 { font-size: 2.2rem; font-weight: 900; text-transform: uppercase; margin-bottom: 15px; color: white; }
+        .vote-cta p { color: var(--text-muted); font-size: 1rem; max-width: 600px; margin: 0 auto 30px auto; line-height: 1.6; }
 
         .btn-vote {
-            background: transparent;
-            color: var(--primary-red);
-            border: 2px solid var(--primary-red);
-            padding: 12px 35px;
-            font-size: 1.1rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: all 0.3s;
-            display: inline-block;
+            background: transparent; color: var(--primary-red); border: 2px solid var(--primary-red);
+            padding: 12px 35px; font-size: 1.1rem; font-weight: 800; text-transform: uppercase;
+            text-decoration: none; border-radius: 5px; transition: all 0.3s; display: inline-block;
         }
 
         @media (hover: hover) and (pointer: fine) {
-            .btn-vote:hover {
-                background: var(--primary-red);
-                color: white;
-                box-shadow: var(--glow);
-                transform: translateY(-3px);
-            }
-        }
-
-        .btn-vote:active {
-            transform: scale(0.95);
-            background: var(--primary-red);
-            color: white;
+            .btn-vote:hover { background: var(--primary-red); color: white; box-shadow: var(--glow); transform: translateY(-3px); }
         }
 
         /* --- TOAST NOTIFICATION --- */
         #toast {
-            visibility: hidden;
-            width: 90%;
-            max-width: 350px;
-            background-color: var(--primary-red);
-            color: #fff;
-            text-align: center;
-            border-radius: 8px;
-            padding: 15px;
-            position: fixed;
-            z-index: 9999;
-            left: 50%;
-            bottom: 20px;
-            transform: translateX(-50%);
-            font-weight: bold;
-            box-shadow: var(--glow);
-            opacity: 0;
-            transition: opacity 0.3s, bottom 0.3s;
-            font-size: 0.9rem;
+            visibility: hidden; width: 90%; max-width: 350px; background-color: var(--primary-red);
+            color: #fff; text-align: center; border-radius: 8px; padding: 15px; position: fixed;
+            z-index: 9999; left: 50%; bottom: 20px; transform: translateX(-50%); font-weight: bold;
+            box-shadow: var(--glow); opacity: 0; transition: opacity 0.3s, bottom 0.3s; font-size: 0.9rem;
         }
 
-        #toast.show {
-            visibility: visible;
-            opacity: 1;
-            bottom: 30px;
-        }
+        #toast.show { visibility: visible; opacity: 1; bottom: 30px; }
 
         /* --- FOOTER --- */
-        footer {
-            background: #050505;
-            padding: 30px 20px;
-            text-align: center;
-            border-top: 1px solid #222;
-        }
-
-        .footer-logo {
-            font-size: 1.2rem;
-            font-weight: 900;
-            margin-bottom: 10px;
-            color: var(--text-muted);
-        }
-
-        .footer-text {
-            color: #666;
-            font-size: 0.8rem;
-            line-height: 1.5;
-        }
+        footer { background: #050505; padding: 30px 20px; text-align: center; border-top: 1px solid #222; }
+        .footer-logo { font-size: 1.2rem; font-weight: 900; margin-bottom: 10px; color: var(--text-muted); }
+        .footer-text { color: #666; font-size: 0.8rem; line-height: 1.5; }
 
         /* --- MOBILE RESPONSIVE MEDIA QUERIES --- */
         @media screen and (max-width: 768px) {
-            .menu-toggle {
-                display: block;
-            }
-
+            .menu-toggle { display: block; }
             .nav-links {
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background: rgba(10, 10, 10, 0.98);
-                flex-direction: column;
-                align-items: center;
-                padding: 0;
-                max-height: 0;
-                overflow: hidden;
-                transition: max-height 0.3s ease-out;
-                border-bottom: 1px solid transparent;
+                position: absolute; top: 100%; left: 0; width: 100%; background: rgba(10, 10, 10, 0.98);
+                flex-direction: column; align-items: center; padding: 0; max-height: 0; overflow: hidden;
+                transition: max-height 0.3s ease-out; border-bottom: 1px solid transparent;
             }
-
-            .nav-links.active {
-                max-height: 300px; 
-                padding: 20px 0;
-                border-bottom: 1px solid var(--glass-border);
-            }
-
-            .nav-links a {
-                margin: 15px 0;
-                font-size: 1.1rem;
-            }
-
-            .hero {
-                padding-top: 100px;
-            }
-
-            .hero h1 {
-                font-size: 2.8rem;
-                margin-bottom: 15px;
-            }
-
-            .hero p {
-                font-size: 1rem;
-                margin-bottom: 30px;
-            }
-
-            .btn-group {
-                flex-direction: column;
-                gap: 12px;
-            }
-
-            .btn {
-                width: 100%; 
-                padding: 16px 20px;
-            }
-
-            .status-strip {
-                font-size: 0.75rem;
-                flex-direction: column;
-                gap: 5px;
-            }
-
-            .status-strip span {
-                display: none; 
-            }
-
-            .section-title {
-                font-size: 2rem;
-            }
-
-            .features {
-                padding: 60px 5%;
-            }
-
-            .vote-cta {
-                padding: 50px 20px;
-            }
-
-            .vote-cta h2 {
-                font-size: 1.8rem;
-            }
-
-            .btn-vote {
-                width: 100%;
-                padding: 14px 20px;
-            }
+            .nav-links.active { max-height: 300px; padding: 20px 0; border-bottom: 1px solid var(--glass-border); }
+            .nav-links a { margin: 15px 0; font-size: 1.1rem; }
+            .hero h1 { font-size: 2.8rem; margin-bottom: 15px; }
+            .btn-group { flex-direction: column; gap: 12px; }
+            .btn { width: 100%; padding: 16px 20px; }
+            .status-strip span { display: none; }
+            .community-section { text-align: center; }
+            .discord-widget iframe { width: 100%; max-width: 350px; }
         }
     </style>
 </head>
@@ -527,12 +409,18 @@
         <div class="nav-links" id="navLinks">
             <a href="#" onclick="toggleMenu()">Home</a>
             <a href="#features" onclick="toggleMenu()">Features</a>
+            <a href="#community" onclick="toggleMenu()">Community</a>
             <a href="https://topg.org/minecraft-servers/server-679412" target="_blank" onclick="toggleMenu()">Vote</a>
-            <a href="https://discord.gg/9jfw4jfBkA" target="_blank">Discord</a>
         </div>
     </nav>
 
     <section class="hero">
+        <video autoplay loop muted playsinline class="video-bg">
+            <source src="https://cdn.pixabay.com/video/2023/10/22/185966-876724594_large.mp4" type="video/mp4">
+        </video>
+        
+        <div id="particles-js"></div>
+
         <div class="hero-content">
             <div class="hero-tag">Season 1 is Live</div>
             <h1>Steal Hearts.<br><span>Survive.</span></h1>
@@ -579,6 +467,20 @@
         </div>
     </section>
 
+    <section id="community" class="community-section">
+        <div class="community-text">
+            <h2>Join the Army</h2>
+            <p>CrystalizedMC isn't just a server; it's an active, thriving community of builders, fighters, and survivors. Join our Discord to find teammates, report rule-breakers, and stay updated on the latest giveaways and server events.</p>
+            <a href="https://discord.gg/9jfw4jfBkA" target="_blank" class="btn btn-discord" style="width: fit-content; border-color: var(--primary-red); color: white;">
+                Join the Discord
+            </a>
+        </div>
+        
+        <div class="discord-widget">
+            <iframe src="https://discord.com/widget?id=1479029718799089768&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+        </div>
+    </section>
+
     <section class="vote-cta">
         <h2>Support CrystalizedMC</h2>
         <p>Help us grow the server! Vote daily to climb the leaderboards and instantly receive free in-game rewards, crate keys, and extra hearts.</p>
@@ -594,7 +496,31 @@
         <p class="footer-text">&copy; 2026 CrystalizedMC Network. All rights reserved.<br>Not affiliated with Mojang AB.</p>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    
     <script>
+        // Initialize Floating Red Particles
+        particlesJS('particles-js', {
+            "particles": {
+                "number": { "value": 60, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": "#ff0033" }, /* Red particles */
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.5, "random": true, "anim": { "enable": true, "speed": 1, "opacity_min": 0.1, "sync": false } },
+                "size": { "value": 4, "random": true, "anim": { "enable": false } },
+                "line_linked": { "enable": false }, /* No lines connecting them, looks cleaner */
+                "move": {
+                    "enable": true, "speed": 1.5, "direction": "top", "random": true,
+                    "straight": false, "out_mode": "out", "bounce": false
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": { "onhover": { "enable": true, "mode": "repulse" }, "onclick": { "enable": true, "mode": "push" }, "resize": true },
+                "modes": { "repulse": { "distance": 100, "duration": 0.4 }, "push": { "particles_nb": 4 } }
+            },
+            "retina_detect": true
+        });
+
         // Mobile Menu Toggle Logic
         function toggleMenu() {
             const navLinks = document.getElementById("navLinks");
@@ -616,22 +542,18 @@
         function fallbackCopyTextToClipboard(text) {
             var textArea = document.createElement("textarea");
             textArea.value = text;
-            
             textArea.style.top = "0";
             textArea.style.left = "0";
             textArea.style.position = "fixed";
-
             document.body.appendChild(textArea);
             textArea.focus();
             textArea.select();
-
             try {
                 var successful = document.execCommand('copy');
                 if (successful) showToast();
             } catch (err) {
                 console.error('Fallback: Oops, unable to copy', err);
             }
-
             document.body.removeChild(textArea);
         }
 
@@ -639,10 +561,7 @@
         function showToast() {
             const toast = document.getElementById("toast");
             toast.className = "show";
-            
-            setTimeout(function(){ 
-                toast.className = toast.className.replace("show", ""); 
-            }, 3000);
+            setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
         }
     </script>
 </body>
