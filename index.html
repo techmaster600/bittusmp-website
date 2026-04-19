@@ -43,9 +43,17 @@
         .reveal { opacity: 0; transform: translateY(40px); transition: 0.8s all ease-out; }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
+        /* --- MAINTENANCE BAR --- */
+        .maintenance-bar {
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 1002;
+            background: repeating-linear-gradient(45deg, var(--red-dark), var(--red-dark) 15px, #660000 15px, #660000 30px);
+            color: white; text-align: center; font-weight: 900; padding: 10px 5%; font-size: 0.85rem; letter-spacing: 2px;
+            text-transform: uppercase; box-shadow: 0 2px 15px rgba(0,0,0,0.8);
+        }
+
         /* --- NAVIGATION --- */
         nav {
-            position: fixed; top: 0; width: 100%; z-index: 1000;
+            position: fixed; top: 40px; width: 100%; z-index: 1000;
             background: rgba(5, 5, 5, 0.85); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
             border-bottom: 1px solid var(--glass-border); padding: 15px 5%;
             display: flex; justify-content: space-between; align-items: center;
@@ -60,13 +68,12 @@
             font-weight: 600; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px; transition: var(--transition);
         }
         .nav-links a:hover { color: var(--red-main); text-shadow: 0 0 10px var(--red-main); }
-
         .menu-toggle { display: none; font-size: 2rem; cursor: pointer; }
 
         /* --- HERO SECTION --- */
         .hero {
             min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
-            text-align: center; position: relative; overflow: hidden; background-color: #000; padding-top: 80px;
+            text-align: center; position: relative; overflow: hidden; background-color: #000; padding-top: 100px;
         }
 
         .video-bg {
@@ -76,12 +83,11 @@
 
         .video-overlay {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to bottom, rgba(5,5,5,0.3) 0%, rgba(5,5,5,0.8) 70%, var(--bg-deep) 100%),
+            background: linear-gradient(to bottom, rgba(5,5,5,0.4) 0%, rgba(5,5,5,0.8) 70%, var(--bg-deep) 100%),
                         radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.9) 100%); z-index: 1;
         }
 
         #particles-js { position: absolute; width: 100%; height: 100%; top: 0; left: 0; z-index: 2; }
-
         .hero-content { z-index: 3; padding: 0 20px; width: 100%; max-width: 900px; animation: heroFade 1.2s ease-out; }
 
         @keyframes heroFade { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
@@ -93,11 +99,7 @@
         }
 
         .hero h1 { font-size: 5.5rem; font-weight: 900; text-transform: uppercase; line-height: 1; margin-bottom: 20px; text-shadow: 5px 5px 25px rgba(0,0,0,1); letter-spacing: -2px; }
-        .hero h1 span {
-            background: linear-gradient(to bottom right, #ff4d4d, var(--red-dark));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 15px rgba(255,0,51,0.5));
-        }
-
+        .hero h1 span { background: linear-gradient(to bottom right, #ff4d4d, var(--red-dark)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 15px rgba(255,0,51,0.5)); }
         .hero p { font-size: 1.2rem; color: #dfdfdf; margin: 0 auto 40px auto; max-width: 650px; text-shadow: 2px 2px 10px rgba(0,0,0,1); font-weight: 400; }
 
         /* Buttons */
@@ -150,6 +152,16 @@
 
         /* --- PREMIUM STORE SECTION --- */
         .store-bg { background: radial-gradient(circle at top, #110000 0%, var(--bg-deep) 100%); }
+        
+        /* Discord Purchase Notice */
+        .store-notice {
+            background: rgba(255, 0, 51, 0.08); border: 1px solid var(--red-main); border-radius: 10px;
+            padding: 30px; max-width: 800px; margin: 0 auto 50px auto; text-align: left; position: relative;
+            box-shadow: var(--red-glow); display: flex; flex-direction: column; align-items: center; text-align: center;
+        }
+        .store-notice h3 { font-size: 1.8rem; color: white; margin-bottom: 15px; text-transform: uppercase; }
+        .store-notice p { color: #e0e0e0; font-size: 1rem; line-height: 1.6; margin-bottom: 25px; }
+        
         .store-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1100px; margin: 0 auto; align-items: center; }
 
         .rank-card {
@@ -157,7 +169,6 @@
             border-radius: 15px; padding: 40px 20px; text-align: center; transition: var(--transition); position: relative;
         }
         
-        /* The "Bestest" Ultimate Rank Styling */
         .rank-card.ultimate {
             border-color: var(--red-main); background: linear-gradient(145deg, rgba(40,5,5,0.9), rgba(10,0,0,0.9));
             transform: scale(1.05); box-shadow: 0 15px 50px rgba(255,0,51,0.2); z-index: 2;
@@ -173,8 +184,9 @@
         .rank-perks li::before { content: '✓'; color: var(--red-main); font-weight: bold; margin-right: 10px; }
 
         .btn-store {
-            display: block; width: 100%; padding: 15px; background: transparent; color: white; border: 2px solid #555;
-            text-transform: uppercase; font-weight: 800; border-radius: 8px; text-decoration: none; transition: var(--transition);
+            display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 15px; 
+            background: transparent; color: white; border: 2px solid #555; text-transform: uppercase; 
+            font-weight: 800; border-radius: 8px; text-decoration: none; transition: var(--transition);
         }
         .rank-card.ultimate .btn-store { background: var(--red-main); border-color: var(--red-main); }
         
@@ -183,10 +195,16 @@
             .btn-store:hover { background: white; color: black; border-color: white; }
         }
 
+        /* --- CRATES SECTION --- */
+        .crates-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; max-width: 900px; margin: 60px auto 0 auto; }
+        .crate-card { background: rgba(10,10,10,0.8); border: 1px solid var(--glass-border); border-radius: 10px; padding: 30px 20px; text-align: center; }
+        .crate-card h4 { font-size: 1.4rem; color: white; margin-bottom: 10px; text-transform: uppercase; }
+        .crate-card p { color: var(--text-dim); font-size: 0.9rem; margin-bottom: 20px; }
+
         /* --- COMMUNITY & SUPPORT --- */
         .community-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; max-width: 1200px; margin: 0 auto; align-items: center; }
         .support-box { background: rgba(255,0,51,0.05); border: 1px solid var(--glass-border); padding: 40px; border-radius: 12px; text-align: left; }
-        .support-box h2 { font-size: 2.2rem; margin-bottom: 15px; color: white; }
+        .support-box h2 { font-size: 2.2rem; margin-bottom: 15px; color: white; text-transform: uppercase; }
         .support-box p { color: var(--text-dim); line-height: 1.7; margin-bottom: 25px; }
         .discord-widget { background: rgba(0,0,0,0.8); padding: 10px; border-radius: 12px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
         
@@ -204,7 +222,7 @@
             visibility: hidden; width: 90%; max-width: 380px; background-color: var(--red-main); color: white;
             text-align: center; border-radius: 8px; padding: 18px; position: fixed; z-index: 9999; left: 50%;
             bottom: -50px; transform: translateX(-50%); font-weight: 800; box-shadow: var(--red-glow);
-            opacity: 0; transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55); font-size: 1rem;
+            opacity: 0; transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55); font-size: 1rem; text-transform: uppercase;
         }
         #toast.show { visibility: visible; opacity: 1; bottom: 40px; }
 
@@ -219,6 +237,8 @@
             .rank-card.ultimate { transform: scale(1); }
         }
         @media screen and (max-width: 768px) {
+            .maintenance-bar { font-size: 0.75rem; padding: 8px 5%; }
+            nav { top: 35px; }
             .menu-toggle { display: block; }
             .nav-links {
                 position: absolute; top: 100%; left: 0; width: 100%; background: rgba(5,5,5,0.98);
@@ -227,6 +247,7 @@
             .nav-links.active { max-height: 400px; padding: 20px 0; border-bottom: 1px solid var(--glass-border); }
             .nav-links a { margin: 15px 0; font-size: 1.1rem; }
             
+            .hero { padding-top: 120px; }
             .hero h1 { font-size: 3.5rem; }
             .btn-group { flex-direction: column; width: 100%; gap: 15px; }
             .btn { width: 100%; justify-content: center; }
@@ -238,6 +259,10 @@
     </style>
 </head>
 <body>
+
+    <div class="maintenance-bar">
+        🚧 Server is currently in Maintenance mode. Join Discord for updates. 🚧
+    </div>
 
     <nav>
         <div class="logo">❤️ <span>Crystalized</span>MC</div>
@@ -259,7 +284,7 @@
         <div id="particles-js"></div>
 
         <div class="hero-content">
-            <div class="hero-tag">Season 1 is Officially Live</div>
+            <div class="hero-tag">Season 1: Rebuilding the Empire</div>
             <h1>Steal Hearts.<br><span>Survive.</span></h1>
             <p>The most ruthless, highly-optimized Lifesteal SMP. Build an unraidable empire, dominate the economy, and collect the hearts of your fallen enemies. Trust no one.</p>
             
@@ -317,8 +342,13 @@
     </section>
 
     <section id="store" class="section-container store-bg">
-        <h2 class="section-title reveal">Global Ranks</h2>
-        <p class="section-subtitle reveal">Support the server development and unlock massive ingame advantages. (Coming Soon)</p>
+        <h2 class="section-title reveal">Server Store</h2>
+        
+        <div class="store-notice reveal">
+            <h3>🛒 Purchasing Notice</h3>
+            <p>Our automated webstore is currently in maintenance along with the server. To purchase any Ranks or Crate Keys, you must join our Discord server and open a <strong>Support Ticket</strong>. Our staff team will manually process your payment and deliver your items.</p>
+            <a href="https://discord.gg/9jfw4jfBkA" target="_blank" class="btn btn-primary" style="padding: 12px 30px; font-size: 0.9rem;">Open Discord Ticket</a>
+        </div>
 
         <div class="store-grid">
             <div class="rank-card reveal">
@@ -329,7 +359,7 @@
                     <li>3x Sethomes</li>
                     <li>Weekly Warrior Kit</li>
                 </ul>
-                <a href="#" class="btn-store">View Store</a>
+                <a href="https://discord.gg/9jfw4jfBkA" target="_blank" class="btn-store">🎟️ Buy via Ticket</a>
             </div>
 
             <div class="rank-card ultimate reveal">
@@ -342,7 +372,7 @@
                     <li>Daily Crystal Crate Keys</li>
                     <li>Keep XP on Death</li>
                 </ul>
-                <a href="#" class="btn-store">View Store</a>
+                <a href="https://discord.gg/9jfw4jfBkA" target="_blank" class="btn-store">🎟️ Buy via Ticket</a>
             </div>
 
             <div class="rank-card reveal">
@@ -353,7 +383,29 @@
                     <li>5x Sethomes</li>
                     <li>Weekly Assassin Kit</li>
                 </ul>
-                <a href="#" class="btn-store">View Store</a>
+                <a href="https://discord.gg/9jfw4jfBkA" target="_blank" class="btn-store">🎟️ Buy via Ticket</a>
+            </div>
+        </div>
+
+        <h2 class="section-title reveal" style="margin-top: 80px; font-size: 2.2rem;">Crate Keys</h2>
+        <div class="crates-grid">
+            <div class="crate-card reveal">
+                <div class="icon" style="font-size: 2.5rem; margin-bottom: 15px;">🗝️</div>
+                <h4>Daily Crate Key</h4>
+                <p>Test your luck for basic materials, food, and starter gear.</p>
+                <a href="https://discord.gg/9jfw4jfBkA" target="_blank" class="btn-store" style="padding: 10px; font-size: 0.8rem;">Buy via Ticket</a>
+            </div>
+            <div class="crate-card reveal">
+                <div class="icon" style="font-size: 2.5rem; margin-bottom: 15px;">💎</div>
+                <h4>Crystal Crate Key</h4>
+                <p>Unlock god-tier armor sets, rare weapons, and extra hearts.</p>
+                <a href="https://discord.gg/9jfw4jfBkA" target="_blank" class="btn-store" style="padding: 10px; font-size: 0.8rem; border-color: var(--red-main); color: var(--red-main);">Buy via Ticket</a>
+            </div>
+            <div class="crate-card reveal">
+                <div class="icon" style="font-size: 2.5rem; margin-bottom: 15px;">✨</div>
+                <h4>Cosmetic Key</h4>
+                <p>Unlock exclusive chat tags, particle effects, and suffixes.</p>
+                <a href="https://discord.gg/9jfw4jfBkA" target="_blank" class="btn-store" style="padding: 10px; font-size: 0.8rem;">Buy via Ticket</a>
             </div>
         </div>
     </section>
@@ -362,9 +414,9 @@
         <div class="community-grid">
             <div class="support-box reveal">
                 <h2>24/7 Active Support</h2>
-                <p>Found a bug? Encountered a rule-breaker? Have an issue with a store purchase? Our dedicated staff team is active around the clock to ensure your experience is flawless.</p>
-                <p>Join the Discord, navigate to the <strong>#support</strong> channel, and open a ticket. We typically respond within minutes.</p>
-                <a href="https://discord.gg/9jfw4jfBkA" target="_blank" class="btn btn-primary" style="width: fit-content; margin-top: 10px;">Open a Ticket</a>
+                <p>Found a bug? Encountered a rule-breaker? Ready to purchase a rank or keys? Our dedicated staff team is active around the clock to ensure your experience is flawless.</p>
+                <p>Join the Discord, navigate to the <strong>#support</strong> channel, and click "Create Ticket". We typically respond within minutes.</p>
+                <a href="https://discord.gg/9jfw4jfBkA" target="_blank" class="btn btn-primary" style="width: fit-content; margin-top: 10px;">Open a Support Ticket</a>
             </div>
             
             <div class="discord-widget reveal">
@@ -445,7 +497,7 @@
                 entries.forEach(entry => {
                     if (!entry.isIntersecting) return;
                     entry.target.classList.add("active");
-                    observer.unobserve(entry.target); // Run once per element
+                    observer.unobserve(entry.target);
                 });
             }, revealOptions);
 
