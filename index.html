@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CrystalizedMC | The Ultimate Lifesteal Experience</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800;900&display=swap');
+
+        /* --- CSS VARIABLES --- */
+        :root {
+            --primary-red: #ff0033;
+            --dark-red: #8b0000;
+            --bg-dark: #0a0a0a;
+            --glass-bg: rgba(20, 10, 10, 0.6);
+            --glass-border: rgba(255, 0, 51, 0.2);
+            --text-main: #ffffff;
+            --text-muted: #b3b3b3;
+            --glow: 0 0 20px rgba(255, 0, 51, 0.6);
+        }
+
+        /* --- BASE STYLES --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            overflow-x: hidden;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--bg-dark); }
+        ::-webkit-scrollbar-thumb { background: var(--dark-red); border-radius: 5px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--primary-red); }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed;
+            top: 0; width: 100%;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass-border);
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo span {
+            color: var(--primary-red);
+            text-shadow: var(--glow);
+        }
+
+        .nav-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            margin-left: 30px;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-red);
+            text-shadow: 0 0 10px var(--primary-red);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            background: linear-gradient(to bottom, rgba(10,10,10,0.3), var(--bg-dark)),
+                        url('https://images.unsplash.com/photo-1628155930542-3c7a64e2c848?q=80&w=1920&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at center, transparent 0%, var(--bg-dark) 100%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            z-index: 2;
+            padding: 0 20px;
+        }
+
+        .hero-tag {
+            background: rgba(255, 0, 51, 0.1);
+            color: var(--primary-red);
+            padding: 5px 15px;
+            border-radius: 20px;
+            border: 1px solid var(--primary-red);
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            display: inline-block;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            text-shadow: 4px 4px 15px rgba(0,0,0,0.8);
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, #ff4d4d, var(--primary-red));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: none;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 40px auto;
+        }
+
+        /* --- BUTTONS --- */
+        .btn-group {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--dark-red), var(--primary-red));
+            color: white;
+            box-shadow: 0 5px 15px rgba(255, 0, 51, 0.4);
+            border: 1px solid #ff4d4d;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: var(--glow);
+        }
+
+        .btn-discord {
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+        }
+
+        .btn-discord:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: white;
+            transform: translateY(-3px);
+        }
+
+        /* --- STATUS STRIP --- */
+        .status-strip {
+            background: linear-gradient(90deg, var(--bg-dark), #1a0000, var(--bg-dark));
+            padding: 20px 0;
+            text-align: center;
+            border-top: 1px solid var(--dark-red);
+            border-bottom: 1px solid var(--dark-red);
+            font-weight: 600;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .status-strip span {
+            color: var(--primary-red);
+            margin: 0 15px;
+        }
+
+        /* --- FEATURES SECTION --- */
+        .features {
+            padding: 100px 5%;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 60px;
+            text-transform: uppercase;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 40px 30px;
+            border-radius: 15px;
+            transition: all 0.4s ease;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 4px;
+            background: linear-gradient(90deg, transparent, var(--primary-red), transparent);
+            transform: translateX(-100%);
+            transition: 0.5s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-red);
+            box-shadow: 0 10px 30px rgba(255, 0, 51, 0.15);
+        }
+
+        .card:hover::before {
+            transform: translateX(100%);
+        }
+
+        .icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: inline-block;
+            filter: drop-shadow(0 0 10px rgba(255,0,51,0.5));
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* --- TOAST NOTIFICATION --- */
+        #toast {
+            visibility: hidden;
+            min-width: 250px;
+            background-color: var(--primary-red);
+            color: #fff;
+            text-align: center;
+            border-radius: 5px;
+            padding: 16px;
+            position: fixed;
+            z-index: 9999;
+            left: 50%;
+            bottom: 30px;
+            transform: translateX(-50%);
+            font-weight: bold;
+            box-shadow: var(--glow);
+            opacity: 0;
+            transition: opacity 0.5s, bottom 0.5s;
+        }
+
+        #toast.show {
+            visibility: visible;
+            opacity: 1;
+            bottom: 50px;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: #050505;
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 1px solid #222;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            margin-bottom: 10px;
+            color: var(--text-muted);
+        }
+
+        .footer-text {
+            color: #666;
+            font-size: 0.85rem;
+        }
+
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">❤️ <span>Crystalized</span>MC</div>
+        <div class="nav-links">
+            <a href="#">Home</a>
+            <a href="#features">Features</a>
+            <a href="https://discord.gg/9jfw4jfBkA" target="_blank">Discord</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-tag">Season 1 is Live</div>
+            <h1>Steal Hearts.<br><span>Survive.</span></h1>
+            <p>Welcome to the most ruthless Lifesteal SMP. Build your empire, wage war, and collect the hearts of your fallen enemies. Trust no one.</p>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" onclick="copyIP()">
+                    🎮 crystaltown.mcsh.io
+                </button>
+                <a href="https://discord.gg/9jfw4jfBkA" target="_blank" class="btn btn-discord">
+                    💬 Join Discord
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <div class="status-strip">
+        Premium Lifesteal <span>|</span> Custom PvP <span>|</span> No Claims <span>|</span> 24/7 Uptime
+    </div>
+
+    <section id="features" class="features">
+        <h2 class="section-title">Server Features</h2>
+        <div class="grid">
+            <div class="card">
+                <div class="icon">🩸</div>
+                <h3>Lifesteal Core</h3>
+                <p>Every kill grants you a heart, and every death takes one away. Reach maximum health to become unstoppable, or face a ban if you lose your last heart.</p>
+            </div>
+            <div class="card">
+                <div class="icon">⚔️</div>
+                <h3>Flawless Combat</h3>
+                <p>Our server runs on highly optimized hardware to ensure hit registration is perfect. No lag spikes when you are in the middle of an intense fight.</p>
+            </div>
+            <div class="card">
+                <div class="icon">💣</div>
+                <h3>Raid & Grief</h3>
+                <p>There are no land claims. Hide your base thousands of blocks away, set up redstone traps, and raid your enemies for their hard-earned loot.</p>
+            </div>
+            <div class="card">
+                <div class="icon">🛒</div>
+                <h3>Player Economy</h3>
+                <p>Trade your items, hearts, and gear safely with other players using our custom auction house and secure trading menus.</p>
+            </div>
+        </div>
+    </section>
+
+    <div id="toast">✅ IP Copied: crystaltown.mcsh.io</div>
+
+    <footer>
+        <div class="footer-logo">CRYSTALIZEDMC</div>
+        <p class="footer-text">&copy; 2026 CrystalizedMC Network. All rights reserved.<br>Not affiliated with Mojang AB.</p>
+    </footer>
+
+    <script>
+        function copyIP() {
+            const ip = "crystaltown.mcsh.io";
+            navigator.clipboard.writeText(ip).then(() => {
+                // Show custom toast notification
+                const toast = document.getElementById("toast");
+                toast.className = "show";
+                
+                // Hide toast after 3 seconds
+                setTimeout(function(){ 
+                    toast.className = toast.className.replace("show", ""); 
+                }, 3000);
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+        }
+    </script>
+</body>
+</html>
