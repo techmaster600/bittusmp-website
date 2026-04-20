@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
-    <title>CrystalizedMC | Premium Survival Network</title>
-    <meta name="title" content="CrystalizedMC | Premium Survival Network">
+    <title>BittuSMP | Premium Survival Network</title>
+    <meta name="title" content="BittuSMP | Premium Survival Network">
     <meta name="description" content="The ultimate Survival SMP experience. Claim your land, build your dream base, trade with a thriving community, and unlock custom enchants.">
     <meta name="theme-color" content="#10b981">
 
@@ -16,7 +16,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,800;0,900;1,900&family=Poppins:wght@400;500;700;800&display=swap" rel="stylesheet">
 
     <style>
-        /* --- PREMIUM VARIABLES --- */
+        /* --- PREMIUM SURVIVAL VARIABLES --- */
         :root {
             --primary: #10b981; 
             --primary-dark: #059669; 
@@ -80,7 +80,7 @@
         }
 
         .logo { font-size: 1.5rem; font-weight: 900; letter-spacing: 1px; display: flex; align-items: center; gap: 10px; }
-        .logo img { height: 35px; width: auto; }
+        .logo span { color: var(--primary); text-shadow: var(--primary-glow); }
 
         .nav-links { display: flex; align-items: center; gap: 35px; }
         .nav-links a {
@@ -111,30 +111,28 @@
 
         .video-bg {
             position: absolute; top: 50%; left: 50%; min-width: 100%; min-height: 100%;
-            width: auto; height: auto; transform: translateX(-50%) translateY(-50%); z-index: 0; object-fit: cover; opacity: 0.8;
+            width: auto; height: auto; transform: translateX(-50%) translateY(-50%); z-index: 0; object-fit: cover; opacity: 0.7;
         }
 
         .video-overlay {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at center, rgba(6,11,20,0.3) 0%, var(--bg-deep) 100%); z-index: 1;
+            background: radial-gradient(circle at center, rgba(6,11,20,0.4) 0%, var(--bg-deep) 100%); z-index: 1;
         }
 
         #particles-js { position: absolute; width: 100%; height: 100%; top: 0; left: 0; z-index: 2; }
         
-        .hero-content { z-index: 3; padding: 0 20px; width: 100%; max-width: 1000px; margin-top: 50px; }
+        .hero-content { z-index: 3; padding: 0 20px; width: 100%; max-width: 1000px; margin-top: 50px; animation: heroFade 1.2s ease-out; }
 
-        /* Floating Animation for Custom Logo */
-        @keyframes float {
-            0% { transform: translateY(0px) drop-shadow(0 10px 20px rgba(0,0,0,0.5)); }
-            50% { transform: translateY(-15px) drop-shadow(0 25px 25px rgba(16,185,129,0.3)); }
-            100% { transform: translateY(0px) drop-shadow(0 10px 20px rgba(0,0,0,0.5)); }
+        @keyframes heroFade { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+        .hero-tag {
+            background: rgba(16, 185, 129, 0.1); color: var(--primary); border: 1px solid rgba(16, 185, 129, 0.4);
+            padding: 6px 20px; border-radius: 30px; font-weight: 800; font-size: 0.85rem; margin-bottom: 25px;
+            display: inline-block; letter-spacing: 3px; text-transform: uppercase; backdrop-filter: blur(5px);
         }
 
-        .server-logo-img {
-            max-width: 600px; width: 90%; height: auto; margin: 0 auto 30px auto;
-            animation: float 6s ease-in-out infinite; display: block;
-        }
-
+        .hero h1 { font-size: 5rem; font-weight: 900; text-transform: uppercase; line-height: 1.1; margin-bottom: 20px; text-shadow: 5px 5px 25px rgba(0,0,0,1); letter-spacing: -2px; }
+        .hero h1 span { background: linear-gradient(to bottom right, #34d399, var(--primary-dark)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 15px rgba(16,185,129,0.5)); }
         .hero p { font-size: 1.25rem; color: #cbd5e1; margin: 0 auto 40px auto; max-width: 700px; font-weight: 500; text-shadow: 0 4px 15px rgba(0,0,0,1); }
 
         /* Buttons */
@@ -182,7 +180,7 @@
             .feature-card:hover .feature-icon-wrapper { background: var(--primary); color: white; box-shadow: var(--primary-glow); transform: rotate(-10deg); }
         }
 
-        /* --- MEET THE STAFF (3D SKINS) --- */
+        /* --- STAFF SECTION (3D SKINS) --- */
         .staff-bg { background: radial-gradient(circle at center, #0a1424 0%, var(--bg-deep) 100%); }
         .staff-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; max-width: 1000px; margin: 0 auto; }
         
@@ -197,8 +195,9 @@
         .staff-card h4 { font-size: 1.4rem; color: white; margin-bottom: 5px; }
         .staff-role { background: rgba(16,185,129,0.15); color: var(--primary); padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; font-weight: 800; letter-spacing: 1px; }
         .staff-card.owner .staff-role { background: rgba(239,68,68,0.15); color: #ef4444; border: 1px solid rgba(239,68,68,0.3); }
+        .staff-card.manager .staff-role { background: rgba(245,158,11,0.15); color: #f59e0b; border: 1px solid rgba(245,158,11,0.3); }
 
-        /* --- RANKS / STORE --- */
+        /* --- STORE SECTION --- */
         .store-notice { padding: 40px; max-width: 800px; margin: 0 auto 60px auto; text-align: center; border-color: var(--primary); box-shadow: var(--primary-glow); }
         .store-notice h3 { font-size: 1.8rem; color: white; margin-bottom: 15px; }
         
@@ -244,9 +243,9 @@
             .nav-links a { margin: 15px 0; font-size: 1.1rem; width: 100%; text-align: center; }
             .nav-links .highlight-btn { width: 80%; margin: 10px auto; display: block; }
             
-            .server-logo-img { width: 100%; margin-top: 20px; }
             .stats-container { margin-top: 30px; grid-template-columns: 1fr; }
             .section-title { font-size: 2.5rem; }
+            .hero h1 { font-size: 3.5rem; }
             .btn-group { flex-direction: column; width: 100%; }
             .btn { width: 100%; }
         }
@@ -259,14 +258,13 @@
     </div>
 
     <nav id="navbar">
-        <div class="logo"><img src="https://cdn-icons-png.flaticon.com/512/8201/8201103.png" alt="Icon" style="filter: brightness(0) invert(1) drop-shadow(0 0 5px #10b981);"> CRYSTALIZED</div>
+        <div class="logo">🌿 <span>BITTU</span>SMP</div>
         <div class="menu-toggle" onclick="toggleMenu()">☰</div>
         <div class="nav-links" id="navLinks">
             <a href="#" onclick="toggleMenu()">Home</a>
             <a href="#features" onclick="toggleMenu()">Features</a>
             <a href="#staff" onclick="toggleMenu()">Staff</a>
             <a href="#store" onclick="toggleMenu()">Store</a>
-            <a href="http://crystaltown.mcsh.io:8123" target="_blank" onclick="toggleMenu()">Live Map</a>
             <a href="https://discord.gg/9jfw4jfBkA" target="_blank" class="highlight-btn" onclick="toggleMenu()">Discord</a>
         </div>
     </nav>
@@ -276,20 +274,22 @@
             <source src="https://cdn.pixabay.com/video/2020/07/22/45388-443144885_large.mp4" type="video/mp4">
         </video>
         <div class="video-overlay"></div>
+        
         <div id="particles-js"></div>
 
-        <div class="hero-content">
-            <img src="https://i.imgur.com/vHqPmbJ.png" alt="CrystalizedMC Logo" class="server-logo-img">
+        <div class="hero-content reveal active">
+            <div class="hero-tag">Season 1: A New Adventure Begins</div>
             
-            <p>Experience the next generation of Survival SMP. Featuring land claiming, a thriving player-driven economy, custom enchantments, and a completely lag-free environment.</p>
+            <h1>Craft Your<br><span>Legacy.</span></h1>
+            <p>The ultimate community-driven Survival SMP. Claim your land, build massive automated farms, trade in the player economy, and explore a breathtaking custom world. Welcome home.</p>
             
             <div class="btn-group">
                 <button class="btn btn-primary" onclick="copyIP()">
-                    <span style="font-size: 1.1rem; letter-spacing: 2px;">crystaltown.mcsh.io</span>
+                    <span style="font-size: 1.1rem; letter-spacing: 2px;">bittusmp.play.hosting</span>
                     <span id="player-count" style="font-size: 0.75rem; color: #a7f3d0; margin-top: 5px; font-weight: 600; text-transform: none; letter-spacing: 0.5px;">🟢 Pinging Server Network...</span>
                 </button>
-                <a href="https://topg.org/minecraft-servers/server-679412" target="_blank" class="btn btn-discord">
-                    🗳️ Vote for Rewards
+                <a href="https://discord.gg/9jfw4jfBkA" target="_blank" class="btn btn-discord">
+                    💬 Join the Discord
                 </a>
             </div>
         </div>
@@ -333,9 +333,9 @@
                 <p>Vanilla enchantments are just the beginning. Unlock god-tier custom enchants using XP to forge weapons and armor that bend the rules of the game.</p>
             </div>
             <div class="feature-card glass-panel reveal">
-                <div class="feature-icon-wrapper">🗺️</div>
-                <h3>Interactive Web Map</h3>
-                <p>View the entire server world in 3D right from your web browser. Scout for the perfect base location, track your friends, and explore the landscape.</p>
+                <div class="feature-icon-wrapper">🤝</div>
+                <h3>Peaceful Community</h3>
+                <p>Tired of toxic servers? We enforce a strict no-griefing policy. Make friends, build collaborative mega-projects, and relax in a friendly environment.</p>
             </div>
             <div class="feature-card glass-panel reveal">
                 <div class="feature-icon-wrapper">🐾</div>
@@ -359,20 +359,20 @@
         <div class="staff-grid">
             <div class="staff-card glass-panel owner reveal">
                 <img src="https://visage.surgeplay.com/full/512/TechMaster600" alt="Owner" class="staff-skin" onerror="this.src='https://visage.surgeplay.com/full/512/MHF_Steve'">
-                <h4>TechMaster</h4>
-                <div class="staff-role">NETWORK OWNER</div>
+                <h4>TechMaster600</h4>
+                <div class="staff-role">OWNER</div>
             </div>
             
-            <div class="staff-card glass-panel reveal">
-                <img src="https://visage.surgeplay.com/full/512/MHF_Alex" alt="Admin" class="staff-skin">
-                <h4>Open Position</h4>
-                <div class="staff-role">SERVER ADMIN</div>
+            <div class="staff-card glass-panel manager reveal">
+                <img src="https://visage.surgeplay.com/full/512/SenpaiSpider" alt="Manager" class="staff-skin" onerror="this.src='https://visage.surgeplay.com/full/512/MHF_Alex'">
+                <h4>VWARRIOR_YT</h4>
+                <div class="staff-role">MANAGER</div>
             </div>
 
             <div class="staff-card glass-panel reveal">
-                <img src="https://visage.surgeplay.com/full/512/MHF_PigZombie" alt="Mod" class="staff-skin">
-                <h4>Open Position</h4>
-                <div class="staff-role">MODERATOR</div>
+                <img src="https://visage.surgeplay.com/full/512/doggy" alt="Helper" class="staff-skin" onerror="this.src='https://visage.surgeplay.com/full/512/MHF_PigZombie'">
+                <h4>saskenback</h4>
+                <div class="staff-role">HELPER</div>
             </div>
         </div>
     </section>
@@ -430,8 +430,8 @@
     <div id="toast">✅ IP COPIED TO CLIPBOARD</div>
 
     <footer>
-        <div class="footer-logo">CRYSTALIZED NETWORK</div>
-        <p class="footer-text">&copy; 2026 CrystalizedMC. All rights reserved.<br>Not affiliated with or endorsed by Mojang AB.</p>
+        <div class="footer-logo">BITTUSMP NETWORK</div>
+        <p class="footer-text">&copy; 2026 BittuSMP. All rights reserved.<br>Not affiliated with or endorsed by Mojang AB.</p>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
@@ -461,9 +461,9 @@
         // Mobile Menu
         function toggleMenu() { document.getElementById("navLinks").classList.toggle("active"); }
 
-        // Premium Toast & Copy Protocol
+        // Premium Toast & Copy Protocol (UPDATED IP)
         function copyIP() {
-            const ip = "crystaltown.mcsh.io";
+            const ip = "bittusmp.play.hosting";
             if (navigator.clipboard && window.isSecureContext) {
                 navigator.clipboard.writeText(ip).then(showToast).catch(fallbackCopyTextToClipboard);
             } else { fallbackCopyTextToClipboard(ip); }
@@ -499,9 +499,9 @@
             reveals.forEach(reveal => { revealOnScroll.observe(reveal); });
         });
 
-        // LIVE PLAYER COUNT API
+        // LIVE PLAYER COUNT API (UPDATED IP)
         async function fetchPlayerCount() {
-            const ip = "crystaltown.mcsh.io";
+            const ip = "bittusmp.play.hosting";
             const element = document.getElementById("player-count");
             try {
                 const response = await fetch(`https://api.mcsrvstat.us/3/${ip}`);
