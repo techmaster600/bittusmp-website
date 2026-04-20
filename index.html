@@ -4,486 +4,464 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
-    <title>CrystalizedMC | Premium Lifesteal Network</title>
-    <meta name="title" content="CrystalizedMC | Premium Lifesteal Network">
-    <meta name="description" content="The most ruthless Lifesteal SMP. Build an empire, dominate the economy, and collect hearts. Premium Anti-Cheat, Daily Keyalls, and Flawless PvP.">
-    <meta name="theme-color" content="#ff0033">
-
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://crystaltown.mcsh.io/">
-    <meta property="og:title" content="CrystalizedMC | Season 1 is Live">
-    <meta property="og:description" content="Join the most optimized Lifesteal SMP. Claim your daily rewards, join the Discord, and start your journey.">
-    <meta property="og:image" content="https://images.unsplash.com/photo-1628155930542-3c7a64e2c848?q=80&w=1920&auto=format&fit=crop">
+    <title>CrystalizedMC | Premium Survival Network</title>
+    <meta name="title" content="CrystalizedMC | Premium Survival Network">
+    <meta name="description" content="The ultimate Survival SMP experience. Claim your land, build your dream base, trade with a thriving community, and unlock custom enchants.">
+    <meta name="theme-color" content="#10b981">
 
     <link rel="icon" type="image/png" href="favicon.png">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,800;0,900;1,900&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,800;0,900;1,900&family=Poppins:wght@400;500;700;800&display=swap" rel="stylesheet">
 
     <style>
-        /* --- CORE VARIABLES --- */
+        /* --- PREMIUM VARIABLES --- */
         :root {
-            --red-main: #ff0033;
-            --red-dark: #8b0000;
-            --red-glow: 0 0 25px rgba(255, 0, 51, 0.6);
-            --bg-deep: #050505;
-            --bg-surface: #0a0a0a;
-            --glass-bg: rgba(15, 5, 5, 0.65);
-            --glass-border: rgba(255, 0, 51, 0.2);
+            --primary: #10b981; 
+            --primary-dark: #059669; 
+            --primary-glow: 0 0 30px rgba(16, 185, 129, 0.4);
+            --bg-deep: #060b14; 
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
             --text-light: #ffffff;
-            --text-dim: #b3b3b3;
-            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --text-dim: #94a3b8;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
         
         body {
             background-color: var(--bg-deep); color: var(--text-light);
-            font-family: 'Poppins', sans-serif; overflow-x: hidden;
+            font-family: 'Poppins', sans-serif; overflow-x: hidden; line-height: 1.6;
         }
 
-        h1, h2, h3, .logo { font-family: 'Montserrat', sans-serif; }
+        h1, h2, h3, h4, .logo { font-family: 'Montserrat', sans-serif; text-transform: uppercase; }
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 8px; }
+        /* Custom Premium Scrollbar */
+        ::-webkit-scrollbar { width: 10px; }
         ::-webkit-scrollbar-track { background: var(--bg-deep); }
-        ::-webkit-scrollbar-thumb { background: var(--red-dark); border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--red-main); }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(to bottom, var(--primary-dark), var(--primary)); border-radius: 10px; border: 2px solid var(--bg-deep); }
 
-        /* --- SCROLL REVEAL ANIMATION CLASS --- */
-        .reveal { opacity: 0; transform: translateY(40px); transition: 0.8s all ease-out; }
+        /* --- UTILITY CLASSES --- */
+        .glass-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            box-shadow: var(--glass-shadow);
+        }
+
+        .reveal { opacity: 0; transform: translateY(50px); transition: 0.8s all cubic-bezier(0.25, 1, 0.5, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
         /* --- MAINTENANCE BAR --- */
         .maintenance-bar {
             position: fixed; top: 0; left: 0; width: 100%; z-index: 1002;
-            background: repeating-linear-gradient(45deg, var(--red-dark), var(--red-dark) 15px, #660000 15px, #660000 30px);
-            color: white; text-align: center; font-weight: 900; padding: 10px 5%; font-size: 0.85rem; letter-spacing: 2px;
-            text-transform: uppercase; box-shadow: 0 2px 15px rgba(0,0,0,0.8);
+            background: linear-gradient(90deg, #022c22, var(--primary-dark), #022c22);
+            color: white; text-align: center; font-weight: 800; padding: 12px 5%; font-size: 0.85rem; letter-spacing: 3px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.8);
         }
 
         /* --- NAVIGATION --- */
         nav {
-            position: fixed; top: 40px; width: 100%; z-index: 1000;
-            background: rgba(5, 5, 5, 0.85); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
-            border-bottom: 1px solid var(--glass-border); padding: 15px 5%;
-            display: flex; justify-content: space-between; align-items: center;
+            position: fixed; top: 44px; width: 90%; left: 5%; z-index: 1000;
+            padding: 15px 30px; display: flex; justify-content: space-between; align-items: center;
+            border-radius: 100px; margin-top: 10px; transition: 0.3s;
+        }
+        nav.scrolled {
+            background: rgba(6, 11, 20, 0.85);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            top: 40px; width: 100%; left: 0; border-radius: 0; margin-top: 0;
         }
 
-        .logo { font-size: 1.6rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; gap: 8px; }
-        .logo span { color: var(--red-main); text-shadow: var(--red-glow); }
+        .logo { font-size: 1.5rem; font-weight: 900; letter-spacing: 1px; display: flex; align-items: center; gap: 10px; }
+        .logo img { height: 35px; width: auto; }
 
-        .nav-links { display: flex; align-items: center; }
+        .nav-links { display: flex; align-items: center; gap: 35px; }
         .nav-links a {
-            color: var(--text-light); text-decoration: none; margin-left: 35px;
-            font-weight: 600; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px; transition: var(--transition);
+            color: var(--text-dim); text-decoration: none; font-weight: 700; font-size: 0.85rem; 
+            letter-spacing: 1px; transition: 0.3s; position: relative;
         }
-        .nav-links a:hover { color: var(--red-main); text-shadow: 0 0 10px var(--red-main); }
-        .menu-toggle { display: none; font-size: 2rem; cursor: pointer; }
+        .nav-links a::after {
+            content: ''; position: absolute; width: 0; height: 2px; bottom: -5px; left: 0;
+            background-color: var(--primary); transition: width 0.3s ease;
+        }
+        .nav-links a:hover { color: var(--text-light); }
+        .nav-links a:hover::after { width: 100%; }
+        
+        .nav-links .highlight-btn {
+            background: rgba(16, 185, 129, 0.1); border: 1px solid var(--primary); color: var(--primary);
+            padding: 8px 20px; border-radius: 50px;
+        }
+        .nav-links .highlight-btn:hover { background: var(--primary); color: white; box-shadow: var(--primary-glow); }
+        .nav-links .highlight-btn::after { display: none; }
+
+        .menu-toggle { display: none; font-size: 2rem; cursor: pointer; color: white; }
 
         /* --- HERO SECTION --- */
         .hero {
             min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
-            text-align: center; position: relative; overflow: hidden; background-color: #000; padding-top: 100px;
+            text-align: center; position: relative; overflow: hidden;
         }
 
         .video-bg {
             position: absolute; top: 50%; left: 50%; min-width: 100%; min-height: 100%;
-            width: auto; height: auto; transform: translateX(-50%) translateY(-50%); z-index: 0; object-fit: cover;
+            width: auto; height: auto; transform: translateX(-50%) translateY(-50%); z-index: 0; object-fit: cover; opacity: 0.8;
         }
 
         .video-overlay {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to bottom, rgba(5,5,5,0.4) 0%, rgba(5,5,5,0.8) 70%, var(--bg-deep) 100%),
-                        radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.9) 100%); z-index: 1;
+            background: radial-gradient(circle at center, rgba(6,11,20,0.3) 0%, var(--bg-deep) 100%); z-index: 1;
         }
 
         #particles-js { position: absolute; width: 100%; height: 100%; top: 0; left: 0; z-index: 2; }
-        .hero-content { z-index: 3; padding: 0 20px; width: 100%; max-width: 900px; animation: heroFade 1.2s ease-out; }
+        
+        .hero-content { z-index: 3; padding: 0 20px; width: 100%; max-width: 1000px; margin-top: 50px; }
 
-        @keyframes heroFade { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-
-        .hero-tag {
-            background: rgba(255, 0, 51, 0.1); color: var(--red-main); border: 1px solid rgba(255, 0, 51, 0.4);
-            padding: 6px 20px; border-radius: 30px; font-weight: 800; font-size: 0.85rem; margin-bottom: 25px;
-            display: inline-block; letter-spacing: 3px; text-transform: uppercase; backdrop-filter: blur(5px);
+        /* Floating Animation for Custom Logo */
+        @keyframes float {
+            0% { transform: translateY(0px) drop-shadow(0 10px 20px rgba(0,0,0,0.5)); }
+            50% { transform: translateY(-15px) drop-shadow(0 25px 25px rgba(16,185,129,0.3)); }
+            100% { transform: translateY(0px) drop-shadow(0 10px 20px rgba(0,0,0,0.5)); }
         }
 
-        .hero h1 { font-size: 5.5rem; font-weight: 900; text-transform: uppercase; line-height: 1; margin-bottom: 20px; text-shadow: 5px 5px 25px rgba(0,0,0,1); letter-spacing: -2px; }
-        .hero h1 span { background: linear-gradient(to bottom right, #ff4d4d, var(--red-dark)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 15px rgba(255,0,51,0.5)); }
-        .hero p { font-size: 1.2rem; color: #dfdfdf; margin: 0 auto 40px auto; max-width: 650px; text-shadow: 2px 2px 10px rgba(0,0,0,1); font-weight: 400; }
+        .server-logo-img {
+            max-width: 600px; width: 90%; height: auto; margin: 0 auto 30px auto;
+            animation: float 6s ease-in-out infinite; display: block;
+        }
+
+        .hero p { font-size: 1.25rem; color: #cbd5e1; margin: 0 auto 40px auto; max-width: 700px; font-weight: 500; text-shadow: 0 4px 15px rgba(0,0,0,1); }
 
         /* Buttons */
         .btn-group { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
         .btn {
-            padding: 16px 40px; font-size: 1rem; font-weight: 800; text-transform: uppercase; text-decoration: none;
-            border-radius: 8px; cursor: pointer; transition: var(--transition); display: flex; align-items: center; justify-content: center; gap: 10px; border: none;
+            padding: 16px 45px; font-size: 1rem; font-weight: 800; text-transform: uppercase; text-decoration: none;
+            border-radius: 12px; cursor: pointer; transition: var(--transition); display: flex; align-items: center; justify-content: center; gap: 12px; border: none;
         }
         .btn-primary { 
-            background: linear-gradient(45deg, var(--red-dark), var(--red-main)); color: white; 
-            box-shadow: 0 5px 20px rgba(255, 0, 51, 0.4); border: 1px solid #ff4d4d; 
-            flex-direction: column; padding: 12px 40px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; 
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3); border: 1px solid rgba(255,255,255,0.2); 
+            flex-direction: column; padding: 12px 45px;
         }
-        .btn-discord { background: rgba(255, 255, 255, 0.05); color: white; border: 1px solid rgba(255, 255, 255, 0.2); backdrop-filter: blur(5px); }
+        .btn-discord { background: var(--glass-bg); color: white; border: 1px solid var(--glass-border); backdrop-filter: blur(10px); }
 
         @media (hover: hover) {
-            .btn-primary:hover { transform: translateY(-5px); box-shadow: var(--red-glow); }
-            .btn-discord:hover { background: rgba(255, 255, 255, 0.1); border-color: white; transform: translateY(-5px); }
+            .btn-primary:hover { transform: translateY(-5px) scale(1.02); box-shadow: var(--primary-glow); border-color: white; }
+            .btn-discord:hover { background: rgba(255, 255, 255, 0.1); border-color: rgba(255,255,255,0.4); transform: translateY(-5px); }
         }
-        .btn:active { transform: scale(0.95); }
 
-        /* --- STATUS STRIP --- */
-        .status-strip {
-            background: linear-gradient(90deg, var(--bg-deep), #1a0000, var(--bg-deep)); padding: 20px 10px;
-            text-align: center; border-top: 1px solid var(--red-dark); border-bottom: 1px solid var(--red-dark);
-            font-weight: 800; letter-spacing: 2px; color: var(--text-dim); text-transform: uppercase; font-size: 0.9rem;
-            display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
+        /* --- SERVER STATS STRIP --- */
+        .stats-container {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;
+            max-width: 1000px; margin: -50px auto 50px auto; position: relative; z-index: 10; padding: 0 20px;
         }
-        .status-strip span { color: var(--red-main); }
+        .stat-box { text-align: center; padding: 25px; border-radius: 16px; border-top: 1px solid rgba(255,255,255,0.1); border-left: 1px solid rgba(255,255,255,0.1); }
+        .stat-box h3 { font-size: 2.5rem; color: var(--primary); margin-bottom: 5px; text-shadow: var(--primary-glow); }
+        .stat-box p { color: var(--text-dim); font-size: 0.85rem; font-weight: 700; letter-spacing: 2px; }
 
-        /* --- FEATURES SECTION --- */
-        .section-container { padding: 100px 5%; text-align: center; position: relative; border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .section-title { font-size: 3rem; font-weight: 900; margin-bottom: 20px; text-transform: uppercase; }
-        .section-subtitle { color: var(--text-dim); margin-bottom: 60px; font-size: 1.1rem; max-width: 600px; margin-left: auto; margin-right: auto; }
+        /* --- SECTION LAYOUTS --- */
+        .section-container { padding: 120px 5%; text-align: center; position: relative; }
+        .section-header { margin-bottom: 70px; }
+        .section-title { font-size: 3.5rem; font-weight: 900; background: linear-gradient(to right, #fff, #94a3b8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .section-subtitle { color: var(--primary); font-weight: 700; letter-spacing: 3px; font-size: 1rem; margin-bottom: 10px; }
 
+        /* --- FEATURES GRID --- */
         .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; }
-
-        .feature-card {
-            background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 12px; padding: 40px 30px;
-            text-align: left; position: relative; overflow: hidden; transition: var(--transition);
-        }
-        .feature-card::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px;
-            background: linear-gradient(90deg, transparent, var(--red-main), transparent); transform: translateX(-100%); transition: 0.6s;
-        }
-        @media (hover: hover) {
-            .feature-card:hover { border-color: var(--red-main); box-shadow: 0 10px 40px rgba(255, 0, 51, 0.15); transform: translateY(-8px); }
-            .feature-card:hover::before { transform: translateX(100%); }
-        }
-
-        .feature-card .icon { font-size: 3rem; margin-bottom: 20px; display: inline-block; filter: drop-shadow(0 0 15px rgba(255,0,51,0.5)); }
-        .feature-card h3 { font-size: 1.5rem; margin-bottom: 12px; color: white; text-transform: uppercase; }
-        .feature-card p { color: var(--text-dim); line-height: 1.7; font-size: 0.95rem; }
-
-        /* --- PREMIUM STORE SECTION --- */
-        .store-bg { background: radial-gradient(circle at top, #110000 0%, var(--bg-deep) 100%); }
-        
-        /* Discord Purchase Notice */
-        .store-notice {
-            background: rgba(255, 0, 51, 0.08); border: 1px solid var(--red-main); border-radius: 10px;
-            padding: 30px; max-width: 800px; margin: 0 auto 50px auto; text-align: left; position: relative;
-            box-shadow: var(--red-glow); display: flex; flex-direction: column; align-items: center; text-align: center;
-        }
-        .store-notice h3 { font-size: 1.8rem; color: white; margin-bottom: 15px; text-transform: uppercase; }
-        .store-notice p { color: #e0e0e0; font-size: 1rem; line-height: 1.6; margin-bottom: 25px; }
-        
-        .store-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1100px; margin: 0 auto; align-items: center; }
-
-        .rank-card {
-            background: linear-gradient(145deg, rgba(15,15,15,0.9), rgba(5,5,5,0.9)); border: 1px solid #333;
-            border-radius: 15px; padding: 40px 20px; text-align: center; transition: var(--transition); position: relative;
-        }
-        
-        .rank-card.ultimate {
-            border-color: var(--red-main); background: linear-gradient(145deg, rgba(40,5,5,0.9), rgba(10,0,0,0.9));
-            transform: scale(1.05); box-shadow: 0 15px 50px rgba(255,0,51,0.2); z-index: 2;
-        }
-        
-        .rank-badge { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: var(--red-main); color: white; padding: 5px 20px; font-weight: 800; text-transform: uppercase; border-radius: 20px; font-size: 0.8rem; box-shadow: var(--red-glow); }
-        
-        .rank-card h3 { font-size: 2rem; margin-bottom: 10px; text-transform: uppercase; }
-        .rank-card.ultimate h3 { color: var(--red-main); text-shadow: var(--red-glow); }
-        
-        .rank-perks { list-style: none; margin: 30px 0; padding: 0; color: var(--text-dim); text-align: left; display: inline-block; }
-        .rank-perks li { margin-bottom: 12px; font-size: 0.9rem; }
-        .rank-perks li::before { content: '✓'; color: var(--red-main); font-weight: bold; margin-right: 10px; }
-
-        .btn-store {
-            display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 15px; 
-            background: transparent; color: white; border: 2px solid #555; text-transform: uppercase; 
-            font-weight: 800; border-radius: 8px; text-decoration: none; transition: var(--transition);
-        }
-        .rank-card.ultimate .btn-store { background: var(--red-main); border-color: var(--red-main); }
+        .feature-card { padding: 50px 40px; text-align: left; position: relative; overflow: hidden; }
+        .feature-icon-wrapper { width: 70px; height: 70px; background: rgba(16,185,129,0.1); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; margin-bottom: 25px; border: 1px solid rgba(16,185,129,0.2); transition: 0.4s; }
+        .feature-card h3 { font-size: 1.5rem; margin-bottom: 15px; color: white; letter-spacing: 1px; }
+        .feature-card p { color: var(--text-dim); font-size: 0.95rem; }
         
         @media (hover: hover) {
-            .rank-card:not(.ultimate):hover { border-color: #666; transform: translateY(-5px); }
-            .btn-store:hover { background: white; color: black; border-color: white; }
+            .feature-card:hover { transform: translateY(-10px); border-color: rgba(16,185,129,0.4); }
+            .feature-card:hover .feature-icon-wrapper { background: var(--primary); color: white; box-shadow: var(--primary-glow); transform: rotate(-10deg); }
         }
 
-        /* --- CRATES SECTION --- */
-        .crates-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; max-width: 900px; margin: 60px auto 0 auto; }
-        .crate-card { background: rgba(10,10,10,0.8); border: 1px solid var(--glass-border); border-radius: 10px; padding: 30px 20px; text-align: center; }
-        .crate-card h4 { font-size: 1.4rem; color: white; margin-bottom: 10px; text-transform: uppercase; }
-        .crate-card p { color: var(--text-dim); font-size: 0.9rem; margin-bottom: 20px; }
-
-        /* --- COMMUNITY & SUPPORT --- */
-        .community-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; max-width: 1200px; margin: 0 auto; align-items: center; }
-        .support-box { background: rgba(255,0,51,0.05); border: 1px solid var(--glass-border); padding: 40px; border-radius: 12px; text-align: left; }
-        .support-box h2 { font-size: 2.2rem; margin-bottom: 15px; color: white; text-transform: uppercase; }
-        .support-box p { color: var(--text-dim); line-height: 1.7; margin-bottom: 25px; }
-        .discord-widget { background: rgba(0,0,0,0.8); padding: 10px; border-radius: 12px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+        /* --- MEET THE STAFF (3D SKINS) --- */
+        .staff-bg { background: radial-gradient(circle at center, #0a1424 0%, var(--bg-deep) 100%); }
+        .staff-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; max-width: 1000px; margin: 0 auto; }
         
-        /* --- VOTE CTA --- */
-        .vote-cta { background: linear-gradient(135deg, var(--bg-surface), rgba(139,0,0,0.3)); text-align: center; }
-        .btn-vote {
-            background: transparent; color: var(--red-main); border: 2px solid var(--red-main);
-            padding: 16px 45px; font-size: 1.1rem; font-weight: 800; text-transform: uppercase;
-            text-decoration: none; border-radius: 8px; transition: var(--transition); display: inline-block;
+        .staff-card { padding: 40px 20px; display: flex; flex-direction: column; align-items: center; text-align: center; transition: 0.4s; }
+        .staff-skin { 
+            height: 220px; width: auto; margin-bottom: 25px; 
+            filter: drop-shadow(0 15px 20px rgba(0,0,0,0.6));
+            transition: 0.5s ease;
         }
-        @media (hover: hover) { .btn-vote:hover { background: var(--red-main); color: white; box-shadow: var(--red-glow); transform: translateY(-4px); } }
+        .staff-card:hover .staff-skin { transform: scale(1.1) translateY(-10px); filter: drop-shadow(0 20px 25px rgba(16,185,129,0.4)); }
+        
+        .staff-card h4 { font-size: 1.4rem; color: white; margin-bottom: 5px; }
+        .staff-role { background: rgba(16,185,129,0.15); color: var(--primary); padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; font-weight: 800; letter-spacing: 1px; }
+        .staff-card.owner .staff-role { background: rgba(239,68,68,0.15); color: #ef4444; border: 1px solid rgba(239,68,68,0.3); }
 
-        /* --- TOAST --- */
-        #toast {
-            visibility: hidden; width: 90%; max-width: 380px; background-color: var(--red-main); color: white;
-            text-align: center; border-radius: 8px; padding: 18px; position: fixed; z-index: 9999; left: 50%;
-            bottom: -50px; transform: translateX(-50%); font-weight: 800; box-shadow: var(--red-glow);
-            opacity: 0; transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55); font-size: 1rem; text-transform: uppercase;
-        }
-        #toast.show { visibility: visible; opacity: 1; bottom: 40px; }
+        /* --- RANKS / STORE --- */
+        .store-notice { padding: 40px; max-width: 800px; margin: 0 auto 60px auto; text-align: center; border-color: var(--primary); box-shadow: var(--primary-glow); }
+        .store-notice h3 { font-size: 1.8rem; color: white; margin-bottom: 15px; }
+        
+        .store-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; align-items: center; }
+        .rank-card { padding: 50px 30px; text-align: center; }
+        .rank-card.ultimate { background: linear-gradient(180deg, rgba(6,78,59,0.4) 0%, rgba(2,44,34,0.1) 100%); border-color: var(--primary); transform: scale(1.05); }
+        
+        .rank-badge { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: var(--primary); color: white; padding: 6px 25px; font-weight: 800; border-radius: 30px; font-size: 0.85rem; box-shadow: var(--primary-glow); border: 1px solid rgba(255,255,255,0.4); }
+        
+        .rank-card h3 { font-size: 2.2rem; margin-bottom: 15px; letter-spacing: 2px; }
+        .rank-card.ultimate h3 { color: var(--primary); text-shadow: var(--primary-glow); }
+        
+        .rank-perks { list-style: none; margin: 30px 0 40px 0; padding: 0; text-align: left; display: inline-block; }
+        .rank-perks li { margin-bottom: 15px; font-size: 0.95rem; color: var(--text-dim); display: flex; align-items: center; gap: 10px; }
+        .rank-perks li::before { content: '✔'; color: var(--primary); font-weight: 900; background: rgba(16,185,129,0.1); width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; }
+
+        .btn-store { padding: 16px; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; font-weight: 800; display: block; text-decoration: none; color: white; transition: 0.3s; background: rgba(0,0,0,0.3); }
+        .rank-card.ultimate .btn-store { background: var(--primary); border-color: var(--primary-dark); box-shadow: 0 5px 15px rgba(16,185,129,0.3); }
+        .btn-store:hover { background: white; color: black; transform: translateY(-3px); }
 
         /* --- FOOTER --- */
-        footer { background: #020202; padding: 50px 20px; text-align: center; border-top: 1px solid #111; }
-        .footer-logo { font-size: 1.5rem; font-weight: 900; margin-bottom: 15px; color: #444; letter-spacing: 2px; }
-        .footer-text { color: #555; font-size: 0.85rem; line-height: 1.6; }
+        footer { background: #03060a; padding: 60px 20px; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); }
+        .footer-logo { font-size: 1.8rem; font-weight: 900; margin-bottom: 20px; color: #475569; letter-spacing: 4px; }
+        .footer-text { color: #334155; font-size: 0.85rem; }
+
+        /* --- TOAST NOTIFICATION --- */
+        #toast { visibility: hidden; width: 90%; max-width: 400px; background: rgba(16,185,129,0.95); backdrop-filter: blur(10px); color: white; text-align: center; border-radius: 12px; padding: 20px; position: fixed; z-index: 9999; left: 50%; bottom: -100px; transform: translateX(-50%); font-weight: 800; box-shadow: 0 10px 30px rgba(0,0,0,0.5); opacity: 0; transition: 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55); font-size: 1rem; border: 1px solid rgba(255,255,255,0.2); }
+        #toast.show { visibility: visible; opacity: 1; bottom: 40px; }
 
         /* --- MOBILE RESPONSIVE --- */
-        @media screen and (max-width: 992px) {
-            .community-grid { grid-template-columns: 1fr; }
+        @media screen and (max-width: 1024px) {
             .rank-card.ultimate { transform: scale(1); }
+            nav { width: 95%; left: 2.5%; }
         }
         @media screen and (max-width: 768px) {
-            .maintenance-bar { font-size: 0.75rem; padding: 8px 5%; }
-            nav { top: 35px; }
+            .maintenance-bar { font-size: 0.7rem; padding: 10px; }
+            nav { top: 35px; border-radius: 16px; padding: 15px 20px; background: rgba(6, 11, 20, 0.95); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); }
+            nav.scrolled { top: 35px; border-radius: 16px; width: 95%; left: 2.5%; margin-top: 10px; }
             .menu-toggle { display: block; }
-            .nav-links {
-                position: absolute; top: 100%; left: 0; width: 100%; background: rgba(5,5,5,0.98);
-                flex-direction: column; padding: 0; max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; border-bottom: 1px solid transparent;
-            }
-            .nav-links.active { max-height: 400px; padding: 20px 0; border-bottom: 1px solid var(--glass-border); }
-            .nav-links a { margin: 15px 0; font-size: 1.1rem; }
             
-            .hero { padding-top: 120px; }
-            .hero h1 { font-size: 3.5rem; }
-            .btn-group { flex-direction: column; width: 100%; gap: 15px; }
-            .btn { width: 100%; justify-content: center; }
-            .status-strip span { display: none; }
+            .nav-links { position: absolute; top: 100%; left: 0; width: 100%; background: rgba(6,11,20,0.98); flex-direction: column; padding: 0; max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; border-radius: 0 0 16px 16px; gap: 0; }
+            .nav-links.active { max-height: 500px; padding: 10px 0 20px 0; border: 1px solid var(--glass-border); border-top: none; }
+            .nav-links a { margin: 15px 0; font-size: 1.1rem; width: 100%; text-align: center; }
+            .nav-links .highlight-btn { width: 80%; margin: 10px auto; display: block; }
             
-            .section-title { font-size: 2.2rem; }
-            .discord-widget iframe { width: 100%; }
+            .server-logo-img { width: 100%; margin-top: 20px; }
+            .stats-container { margin-top: 30px; grid-template-columns: 1fr; }
+            .section-title { font-size: 2.5rem; }
+            .btn-group { flex-direction: column; width: 100%; }
+            .btn { width: 100%; }
         }
     </style>
 </head>
 <body>
 
     <div class="maintenance-bar">
-        🚧 Server is currently in Maintenance mode. Join Discord for updates. 🚧
+        🚧 SERVER IN MAINTENANCE • JOIN DISCORD FOR WHITELIST 🚧
     </div>
 
-    <nav>
-        <div class="logo">❤️ <span>Crystalized</span>MC</div>
+    <nav id="navbar">
+        <div class="logo"><img src="https://cdn-icons-png.flaticon.com/512/8201/8201103.png" alt="Icon" style="filter: brightness(0) invert(1) drop-shadow(0 0 5px #10b981);"> CRYSTALIZED</div>
         <div class="menu-toggle" onclick="toggleMenu()">☰</div>
         <div class="nav-links" id="navLinks">
             <a href="#" onclick="toggleMenu()">Home</a>
             <a href="#features" onclick="toggleMenu()">Features</a>
+            <a href="#staff" onclick="toggleMenu()">Staff</a>
             <a href="#store" onclick="toggleMenu()">Store</a>
-            <a href="#community" onclick="toggleMenu()">Support</a>
-            <a href="https://topg.org/minecraft-servers/server-679412" target="_blank" onclick="toggleMenu()">Vote</a>
+            <a href="http://crystaltown.mcsh.io:8123" target="_blank" onclick="toggleMenu()">Live Map</a>
+            <a href="https://discord.gg/9jfw4jfBkA" target="_blank" class="highlight-btn" onclick="toggleMenu()">Discord</a>
         </div>
     </nav>
 
     <section class="hero">
         <video autoplay loop muted playsinline class="video-bg">
-            <source src="https://cdn.pixabay.com/video/2023/10/22/185966-876724594_large.mp4" type="video/mp4">
+            <source src="https://cdn.pixabay.com/video/2020/07/22/45388-443144885_large.mp4" type="video/mp4">
         </video>
         <div class="video-overlay"></div>
         <div id="particles-js"></div>
 
         <div class="hero-content">
-            <div class="hero-tag">Season 1: Rebuilding the Empire</div>
-            <h1>Steal Hearts.<br><span>Survive.</span></h1>
-            <p>The most ruthless, highly-optimized Lifesteal SMP. Build an unraidable empire, dominate the economy, and collect the hearts of your fallen enemies. Trust no one.</p>
+            <img src="https://i.imgur.com/vHqPmbJ.png" alt="CrystalizedMC Logo" class="server-logo-img">
+            
+            <p>Experience the next generation of Survival SMP. Featuring land claiming, a thriving player-driven economy, custom enchantments, and a completely lag-free environment.</p>
             
             <div class="btn-group">
                 <button class="btn btn-primary" onclick="copyIP()">
-                    <span style="font-size: 1.1rem; letter-spacing: 1px;">🎮 crystaltown.mcsh.io</span>
-                    <span id="player-count" style="font-size: 0.75rem; color: #ffcccc; margin-top: 5px; font-weight: 600; text-transform: none; letter-spacing: 0.5px;">🔴 Pinging server...</span>
+                    <span style="font-size: 1.1rem; letter-spacing: 2px;">crystaltown.mcsh.io</span>
+                    <span id="player-count" style="font-size: 0.75rem; color: #a7f3d0; margin-top: 5px; font-weight: 600; text-transform: none; letter-spacing: 0.5px;">🟢 Pinging Server Network...</span>
                 </button>
-                <a href="https://discord.gg/9jfw4jfBkA" target="_blank" class="btn btn-discord">
-                    💬 Join the Discord
+                <a href="https://topg.org/minecraft-servers/server-679412" target="_blank" class="btn btn-discord">
+                    🗳️ Vote for Rewards
                 </a>
             </div>
         </div>
     </section>
 
-    <div class="status-strip">
-        Premium Anti-Cheat <span>|</span> Daily Keyalls <span>|</span> Flawless PvP <span>|</span> Zero Lag
+    <div class="stats-container reveal">
+        <div class="stat-box glass-panel">
+            <h3>24/7</h3>
+            <p>NETWORK UPTIME</p>
+        </div>
+        <div class="stat-box glass-panel">
+            <h3>24GB</h3>
+            <p>DEDICATED RAM</p>
+        </div>
+        <div class="stat-box glass-panel">
+            <h3>0 MS</h3>
+            <p>COMBAT LATENCY</p>
+        </div>
     </div>
 
     <section id="features" class="section-container">
-        <h2 class="section-title reveal">Why Play Here?</h2>
-        <p class="section-subtitle reveal">We completely rebuilt the standard SMP experience from the ground up to provide the ultimate competitive environment.</p>
+        <div class="section-header reveal">
+            <div class="section-subtitle">THE EXPERIENCE</div>
+            <h2 class="section-title">PREMIUM FEATURES</h2>
+        </div>
         
         <div class="features-grid">
-            <div class="feature-card reveal">
-                <div class="icon">🩸</div>
-                <h3>Lifesteal Core</h3>
-                <p>Every kill grants you a heart; every death steals one. Reach max health to become a juggernaut, or risk a ban if you hit zero.</p>
+            <div class="feature-card glass-panel reveal">
+                <div class="feature-icon-wrapper">🏰</div>
+                <h3>Golden Shovel Claims</h3>
+                <p>Protect your builds instantly. Select two corners with a golden shovel to create an absolute safe zone where no one can grief, steal, or open your chests.</p>
             </div>
-            <div class="feature-card reveal">
-                <div class="icon">🛡️</div>
-                <h3>Premium Anti-Cheat</h3>
-                <p>Zero tolerance for hackers. Our custom-configured, enterprise-grade anti-cheat ensures flawless hit registration and a perfectly fair playing field.</p>
+            <div class="feature-card glass-panel reveal">
+                <div class="feature-icon-wrapper">💎</div>
+                <h3>Advanced Economy</h3>
+                <p>Dominate the market. Create physical chest shops at your base, auction rare items globally, or trade securely using our custom graphical menus.</p>
             </div>
-            <div class="feature-card reveal">
-                <div class="icon">🎁</div>
-                <h3>Daily Keyalls</h3>
-                <p>We reward active players. Log in daily to receive server-wide Keyalls. Unlock epic crates for top-tier weapons, armor, and extra hearts.</p>
+            <div class="feature-card glass-panel reveal">
+                <div class="feature-icon-wrapper">⚡</div>
+                <h3>Custom Enchants</h3>
+                <p>Vanilla enchantments are just the beginning. Unlock god-tier custom enchants using XP to forge weapons and armor that bend the rules of the game.</p>
             </div>
-            <div class="feature-card reveal">
-                <div class="icon">⚔️</div>
-                <h3>Optimized Combat</h3>
-                <p>Hosted on high-frequency processors. Experience completely lag-free PvP with custom knockback tuning and smooth end-crystal combat.</p>
+            <div class="feature-card glass-panel reveal">
+                <div class="feature-icon-wrapper">🗺️</div>
+                <h3>Interactive Web Map</h3>
+                <p>View the entire server world in 3D right from your web browser. Scout for the perfect base location, track your friends, and explore the landscape.</p>
             </div>
-            <div class="feature-card reveal">
-                <div class="icon">💣</div>
-                <h3>Raid & Grief</h3>
-                <p>No land claims. No safety nets. Hide your base thousands of blocks out, craft deadly redstone traps, and raid enemies for their loot.</p>
+            <div class="feature-card glass-panel reveal">
+                <div class="feature-icon-wrapper">🐾</div>
+                <h3>Cosmetics & Companions</h3>
+                <p>Stand out from the crowd. Equip glowing particle wings, custom chat prefixes, and summon adorable miniature pets to follow you on your adventures.</p>
             </div>
-            <div class="feature-card reveal">
-                <div class="icon">🛒</div>
-                <h3>Player Economy</h3>
-                <p>Dominate the market. Trade items, hearts, and bounties safely using our advanced Auction House and secure player-to-player trading GUI.</p>
+            <div class="feature-card glass-panel reveal">
+                <div class="feature-icon-wrapper">⚔️</div>
+                <h3>Flawless Performance</h3>
+                <p>Hosted on high-frequency enterprise processors with dedicated memory, ensuring chunk loading and combat hit-registration remains completely lag-free.</p>
             </div>
         </div>
     </section>
 
-    <section id="store" class="section-container store-bg">
-        <h2 class="section-title reveal">Server Store</h2>
+    <section id="staff" class="section-container staff-bg">
+        <div class="section-header reveal">
+            <div class="section-subtitle">THE TEAM</div>
+            <h2 class="section-title">MEET THE STAFF</h2>
+        </div>
+
+        <div class="staff-grid">
+            <div class="staff-card glass-panel owner reveal">
+                <img src="https://visage.surgeplay.com/full/512/TechMaster600" alt="Owner" class="staff-skin" onerror="this.src='https://visage.surgeplay.com/full/512/MHF_Steve'">
+                <h4>TechMaster</h4>
+                <div class="staff-role">NETWORK OWNER</div>
+            </div>
+            
+            <div class="staff-card glass-panel reveal">
+                <img src="https://visage.surgeplay.com/full/512/MHF_Alex" alt="Admin" class="staff-skin">
+                <h4>Open Position</h4>
+                <div class="staff-role">SERVER ADMIN</div>
+            </div>
+
+            <div class="staff-card glass-panel reveal">
+                <img src="https://visage.surgeplay.com/full/512/MHF_PigZombie" alt="Mod" class="staff-skin">
+                <h4>Open Position</h4>
+                <div class="staff-role">MODERATOR</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="store" class="section-container">
+        <div class="section-header reveal">
+            <div class="section-subtitle">SUPPORT US</div>
+            <h2 class="section-title">GLOBAL STORE</h2>
+        </div>
         
-        <div class="store-notice reveal">
-            <h3>🛒 Purchasing Notice</h3>
-            <p>Our automated webstore is currently in maintenance along with the server. To purchase any Ranks or Crate Keys, you must join our Discord server and open a <strong>Support Ticket</strong>. Our staff team will manually process your payment and deliver your items.</p>
-            <a href="https://discord.gg/9jfw4jfBkA" target="_blank" class="btn btn-primary" style="padding: 12px 30px; font-size: 0.9rem;">Open Discord Ticket</a>
+        <div class="store-notice glass-panel reveal">
+            <h3>🛒 MANUAL STORE OPEN</h3>
+            <p style="color: var(--text-dim); margin-bottom: 25px;">Our automated webstore is finalizing setup. To purchase any Ranks, Crates, or Perks, please join our Discord server and open a <strong>Support Ticket</strong>. Staff will manually deliver your items instantly.</p>
+            <a href="https://discord.gg/9jfw4jfBkA" target="_blank" class="btn btn-primary" style="display: inline-flex; padding: 12px 35px; font-size: 0.9rem;">Open Discord Ticket</a>
         </div>
 
         <div class="store-grid">
-            <div class="rank-card reveal">
-                <h3>Warrior</h3>
+            <div class="rank-card glass-panel reveal">
+                <h3>ADVENTURER</h3>
                 <ul class="rank-perks">
-                    <li>Custom Chat Prefix</li>
-                    <li>Access to /nick</li>
-                    <li>3x Sethomes</li>
-                    <li>Weekly Warrior Kit</li>
+                    <li>Custom [Adventurer] Chat Tag</li>
+                    <li>Access to /sit, /spin, /crawl</li>
+                    <li>3x Extra Sethomes</li>
+                    <li>Weekly Survival Kit</li>
                 </ul>
-                <a href="https://discord.gg/9jfw4jfBkA" target="_blank" class="btn-store">🎟️ Buy via Ticket</a>
+                <a href="https://discord.gg/9jfw4jfBkA" target="_blank" class="btn-store">🎟️ PURCHASE VIA TICKET</a>
             </div>
 
-            <div class="rank-card ultimate reveal">
-                <div class="rank-badge">Most Popular</div>
-                <h3>Crystal</h3>
+            <div class="rank-card glass-panel ultimate reveal">
+                <div class="rank-badge">BEST VALUE</div>
+                <h3>LEGENDARY</h3>
                 <ul class="rank-perks">
-                    <li>Glowing Red Chat Name</li>
+                    <li>Glowing Emerald Chat Name</li>
+                    <li>Ability to Fly inside your Claims</li>
+                    <li>Unlimited Sethomes & /feed</li>
+                    <li>Daily Mythic Crate Keys</li>
                     <li>Priority Queue Bypass</li>
-                    <li>10x Sethomes & /feed</li>
-                    <li>Daily Crystal Crate Keys</li>
-                    <li>Keep XP on Death</li>
                 </ul>
-                <a href="https://discord.gg/9jfw4jfBkA" target="_blank" class="btn-store">🎟️ Buy via Ticket</a>
+                <a href="https://discord.gg/9jfw4jfBkA" target="_blank" class="btn-store">🎟️ PURCHASE VIA TICKET</a>
             </div>
 
-            <div class="rank-card reveal">
-                <h3>Assassin</h3>
+            <div class="rank-card glass-panel reveal">
+                <h3>PIONEER</h3>
                 <ul class="rank-perks">
-                    <li>Custom Chat Prefix</li>
-                    <li>Access to /hat & /craft</li>
-                    <li>5x Sethomes</li>
-                    <li>Weekly Assassin Kit</li>
+                    <li>Custom [Pioneer] Chat Tag</li>
+                    <li>Access to Portable /craft & /ec</li>
+                    <li>5x Extra Sethomes</li>
+                    <li>Weekly Resource Kit</li>
                 </ul>
-                <a href="https://discord.gg/9jfw4jfBkA" target="_blank" class="btn-store">🎟️ Buy via Ticket</a>
-            </div>
-        </div>
-
-        <h2 class="section-title reveal" style="margin-top: 80px; font-size: 2.2rem;">Crate Keys</h2>
-        <div class="crates-grid">
-            <div class="crate-card reveal">
-                <div class="icon" style="font-size: 2.5rem; margin-bottom: 15px;">🗝️</div>
-                <h4>Daily Crate Key</h4>
-                <p>Test your luck for basic materials, food, and starter gear.</p>
-                <a href="https://discord.gg/9jfw4jfBkA" target="_blank" class="btn-store" style="padding: 10px; font-size: 0.8rem;">Buy via Ticket</a>
-            </div>
-            <div class="crate-card reveal">
-                <div class="icon" style="font-size: 2.5rem; margin-bottom: 15px;">💎</div>
-                <h4>Crystal Crate Key</h4>
-                <p>Unlock god-tier armor sets, rare weapons, and extra hearts.</p>
-                <a href="https://discord.gg/9jfw4jfBkA" target="_blank" class="btn-store" style="padding: 10px; font-size: 0.8rem; border-color: var(--red-main); color: var(--red-main);">Buy via Ticket</a>
-            </div>
-            <div class="crate-card reveal">
-                <div class="icon" style="font-size: 2.5rem; margin-bottom: 15px;">✨</div>
-                <h4>Cosmetic Key</h4>
-                <p>Unlock exclusive chat tags, particle effects, and suffixes.</p>
-                <a href="https://discord.gg/9jfw4jfBkA" target="_blank" class="btn-store" style="padding: 10px; font-size: 0.8rem;">Buy via Ticket</a>
+                <a href="https://discord.gg/9jfw4jfBkA" target="_blank" class="btn-store">🎟️ PURCHASE VIA TICKET</a>
             </div>
         </div>
     </section>
 
-    <section id="community" class="section-container">
-        <div class="community-grid">
-            <div class="support-box reveal">
-                <h2>24/7 Active Support</h2>
-                <p>Found a bug? Encountered a rule-breaker? Ready to purchase a rank or keys? Our dedicated staff team is active around the clock to ensure your experience is flawless.</p>
-                <p>Join the Discord, navigate to the <strong>#support</strong> channel, and click "Create Ticket". We typically respond within minutes.</p>
-                <a href="https://discord.gg/9jfw4jfBkA" target="_blank" class="btn btn-primary" style="width: fit-content; margin-top: 10px; padding: 15px 30px;">Open a Support Ticket</a>
-            </div>
-            
-            <div class="discord-widget reveal">
-                <iframe src="https://discord.com/widget?id=1479029718799089768&theme=dark" width="100%" height="400" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
-            </div>
-        </div>
-    </section>
-
-    <section class="section-container vote-cta">
-        <h2 class="reveal">Boost the Server</h2>
-        <p class="reveal">The more players we have, the more blood is shed. Vote for CrystalizedMC daily to boost our ranking and instantly receive free Crate Keys and Rewards ingame!</p>
-        <div class="reveal">
-            <a href="https://topg.org/minecraft-servers/server-679412" target="_blank" class="btn-vote">
-                🗳️ Click Here to Vote
-            </a>
-        </div>
-    </section>
-
-    <div id="toast">✅ IP COPIED: crystaltown.mcsh.io</div>
+    <div id="toast">✅ IP COPIED TO CLIPBOARD</div>
 
     <footer>
-        <div class="footer-logo">CRYSTALIZEDMC</div>
-        <p class="footer-text">&copy; 2026 CrystalizedMC Network. All rights reserved.<br>Not affiliated with or endorsed by Mojang AB.</p>
+        <div class="footer-logo">CRYSTALIZED NETWORK</div>
+        <p class="footer-text">&copy; 2026 CrystalizedMC. All rights reserved.<br>Not affiliated with or endorsed by Mojang AB.</p>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <script>
-        // Embers Particles
+        // High-Tier Ambient Fireflies
         particlesJS('particles-js', {
             "particles": {
-                "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
-                "color": { "value": ["#ff0033", "#ff4d4d", "#ff1a1a"] },
+                "number": { "value": 50, "density": { "enable": true, "value_area": 1000 } },
+                "color": { "value": ["#10b981", "#34d399", "#ffffff"] },
                 "shape": { "type": "circle" },
-                "opacity": { "value": 0.7, "random": true, "anim": { "enable": true, "speed": 1, "opacity_min": 0.1, "sync": false } },
-                "size": { "value": 3, "random": true, "anim": { "enable": true, "speed": 2, "size_min": 0.1, "sync": false } },
+                "opacity": { "value": 0.6, "random": true, "anim": { "enable": true, "speed": 0.5, "opacity_min": 0.1, "sync": false } },
+                "size": { "value": 3, "random": true, "anim": { "enable": true, "speed": 1, "size_min": 0.5, "sync": false } },
                 "line_linked": { "enable": false },
-                "move": { "enable": true, "speed": 1.5, "direction": "top", "random": true, "straight": false, "out_mode": "out", "bounce": false }
+                "move": { "enable": true, "speed": 0.6, "direction": "top", "random": true, "straight": false, "out_mode": "out", "bounce": false }
             },
-            "interactivity": {
-                "detect_on": "canvas",
-                "events": { "onhover": { "enable": true, "mode": "bubble" }, "onclick": { "enable": true, "mode": "push" }, "resize": true },
-                "modes": { "bubble": { "distance": 150, "size": 5, "duration": 2, "opacity": 1, "speed": 3 }, "push": { "particles_nb": 4 } }
-            },
+            "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": false }, "onclick": { "enable": false }, "resize": true } },
             "retina_detect": true
+        });
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) { nav.classList.add('scrolled'); } 
+            else { nav.classList.remove('scrolled'); }
         });
 
         // Mobile Menu
         function toggleMenu() { document.getElementById("navLinks").classList.toggle("active"); }
 
-        // Copy IP
+        // Premium Toast & Copy Protocol
         function copyIP() {
             const ip = "crystaltown.mcsh.io";
             if (navigator.clipboard && window.isSecureContext) {
@@ -502,13 +480,13 @@
         function showToast() {
             const toast = document.getElementById("toast");
             toast.classList.add("show");
-            setTimeout(() => { toast.classList.remove("show"); }, 3000);
+            setTimeout(() => { toast.classList.remove("show"); }, 3500);
         }
 
-        // SCROLL REVEAL ANIMATION (Intersection Observer)
+        // SCROLL REVEAL ANIMATION
         document.addEventListener("DOMContentLoaded", () => {
             const reveals = document.querySelectorAll(".reveal");
-            const revealOptions = { threshold: 0.15, rootMargin: "0px 0px -50px 0px" };
+            const revealOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
             
             const revealOnScroll = new IntersectionObserver(function(entries, observer) {
                 entries.forEach(entry => {
@@ -531,18 +509,17 @@
                 
                 if (data.online) {
                     element.innerHTML = `🟢 ${data.players.online} Players Online`;
-                    element.style.color = "#aaffaa"; // Light green
+                    element.style.color = "#a7f3d0"; 
                 } else {
                     element.innerHTML = `🔴 Server Offline / Maintenance`;
-                    element.style.color = "#ffaaaa"; // Light red
+                    element.style.color = "#fca5a5"; 
                 }
             } catch (error) {
-                element.innerHTML = `⚪ Status Unavailable`;
-                element.style.color = "#cccccc";
+                element.innerHTML = `⚪ Network Status Unavailable`;
+                element.style.color = "#cbd5e1";
             }
         }
         
-        // Fetch on load, then update every 60 seconds
         fetchPlayerCount();
         setInterval(fetchPlayerCount, 60000);
 
