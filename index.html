@@ -18,20 +18,23 @@
     <style>
         /* --- PREMIUM TABAHI VARIABLES (EMERALD & GOLD) --- */
         :root {
-            --primary: #10b981; /* Emerald Green */
+            --primary: #10b981; 
             --primary-dark: #059669;
             --primary-glow: 0 0 25px rgba(16, 185, 129, 0.5);
             
-            --accent: #fbbf24; /* Premium Gold/Yellow */
+            --accent: #fbbf24; 
             --accent-dark: #d97706;
-            --accent-glow: 0 0 30px rgba(251, 191, 36, 0.4);
+            --accent-glow: 0 0 30px rgba(251, 191, 36, 0.5);
             
-            --bg-deep: #0a0f16; /* Pitch Dark Slate */
+            --elite-color: #ef4444;
+            --elite-glow: 0 0 40px rgba(239, 68, 68, 0.6);
+
+            --bg-deep: #0a0f16; 
             --bg-gradient: radial-gradient(circle at top center, #111a24 0%, var(--bg-deep) 100%);
             
-            --glass-bg: rgba(255, 255, 255, 0.02);
-            --glass-border: rgba(255, 255, 255, 0.05);
-            --glass-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.7);
+            --glass-bg: rgba(20, 25, 35, 0.4);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-shadow: 0 15px 35px 0 rgba(0, 0, 0, 0.6);
             
             --text-light: #ffffff;
             --text-dim: #94a3b8;
@@ -51,15 +54,15 @@
         /* Custom Gold/Green Scrollbar */
         ::-webkit-scrollbar { width: 10px; }
         ::-webkit-scrollbar-track { background: var(--bg-deep); }
-        ::-webkit-scrollbar-thumb { background: linear-gradient(to bottom, var(--accent), var(--primary)); border-radius: 10px; border: 2px solid var(--bg-deep); }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(to bottom, var(--accent), var(--primary)); border-radius: 10px; }
 
-        /* --- UTILITY CLASSES --- */
+        /* --- UTILITY & ANIMATIONS --- */
         .glass-panel {
             background: var(--glass-bg);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border: 1px solid var(--glass-border);
-            border-radius: 16px;
+            border-radius: 20px;
             box-shadow: var(--glass-shadow);
             transition: var(--transition);
         }
@@ -67,13 +70,24 @@
         .reveal { opacity: 0; transform: translateY(40px); transition: 0.8s all cubic-bezier(0.25, 1, 0.5, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
+        @keyframes pulse-border {
+            0% { border-color: rgba(239, 68, 68, 0.4); box-shadow: 0 0 20px rgba(239, 68, 68, 0.2); }
+            50% { border-color: rgba(239, 68, 68, 1); box-shadow: var(--elite-glow); }
+            100% { border-color: rgba(239, 68, 68, 0.4); box-shadow: 0 0 20px rgba(239, 68, 68, 0.2); }
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
         /* --- NAVIGATION --- */
         nav {
             position: fixed; top: 30px; width: 90%; left: 5%; z-index: 1000;
             padding: 15px 30px; display: flex; justify-content: space-between; align-items: center;
             border-radius: 100px; transition: 0.4s ease-in-out;
             background: rgba(10, 15, 22, 0.6);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(15px);
             border: 1px solid rgba(255,255,255,0.05);
         }
         nav.scrolled {
@@ -87,29 +101,24 @@
 
         .nav-links { display: flex; align-items: center; gap: 30px; }
         .nav-links a {
-            color: var(--text-dim); text-decoration: none; font-weight: 600; font-size: 0.9rem; 
+            color: var(--text-dim); text-decoration: none; font-weight: 700; font-size: 0.9rem; 
             letter-spacing: 1px; transition: 0.3s; position: relative; text-transform: uppercase;
         }
-        .nav-links a::after {
-            content: ''; position: absolute; width: 0; height: 2px; bottom: -5px; left: 0;
-            background-color: var(--primary); transition: width 0.3s ease;
-        }
         .nav-links a:hover { color: var(--text-light); }
-        .nav-links a:hover::after { width: 100%; }
         
         .nav-links .highlight-btn {
             background: linear-gradient(45deg, var(--accent-dark), var(--accent)); border: none; color: #000;
             padding: 10px 24px; border-radius: 50px; font-weight: 800; box-shadow: var(--accent-glow);
         }
         .nav-links .highlight-btn:hover { color: #000; transform: scale(1.05); }
-        .nav-links .highlight-btn::after { display: none; }
 
         .menu-toggle { display: none; font-size: 2rem; cursor: pointer; color: white; z-index: 1001; }
 
-        /* --- HERO SECTION --- */
+        /* --- HERO SECTION (GLITCH FIXED) --- */
         .hero {
             min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
-            text-align: center; position: relative; overflow: hidden; padding-top: 80px;
+            text-align: center; position: relative; overflow: hidden; 
+            padding-top: 120px; padding-bottom: 120px; /* FIX: Added bottom padding to stop overlap */
         }
 
         .video-bg {
@@ -133,39 +142,39 @@
             letter-spacing: 3px; text-transform: uppercase; backdrop-filter: blur(5px); box-shadow: var(--accent-glow);
         }
 
-        .hero h1 { font-size: clamp(3.5rem, 8vw, 6.5rem); font-weight: 900; text-transform: uppercase; line-height: 1; margin-bottom: 25px; text-shadow: 0 10px 40px rgba(0,0,0,0.9); letter-spacing: -2px; }
+        .hero h1 { font-size: clamp(3rem, 7vw, 6.5rem); font-weight: 900; text-transform: uppercase; line-height: 1.1; margin-bottom: 25px; text-shadow: 0 10px 40px rgba(0,0,0,0.9); letter-spacing: -2px; }
         .hero h1 span { background: linear-gradient(to right, var(--primary), #34d399); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 25px rgba(16,185,129,0.5)); }
         .hero p { font-size: clamp(1.1rem, 2vw, 1.3rem); color: #cbd5e1; margin: 0 auto 40px auto; max-width: 750px; font-weight: 500; line-height: 1.8; }
 
-        /* Buttons */
-        .btn-group { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; width: 100%; }
+        /* Hero Buttons */
+        .btn-group { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; width: 100%; z-index: 10; position: relative;}
         .btn {
             padding: 18px 45px; font-size: 1rem; font-weight: 800; text-transform: uppercase; text-decoration: none;
             border-radius: 12px; cursor: pointer; transition: var(--transition); display: flex; align-items: center; justify-content: center; gap: 12px; border: none;
         }
         .btn-primary { 
             background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; 
-            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3); border: 1px solid rgba(255,255,255,0.2); 
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.4); border: 1px solid rgba(255,255,255,0.2); 
             flex-direction: column; min-width: 300px;
         }
-        .btn-discord { background: transparent; color: white; border: 2px solid var(--accent); min-width: 240px; box-shadow: inset 0 0 10px rgba(251,191,36,0.1); }
+        .btn-discord { background: rgba(0,0,0,0.5); color: white; border: 2px solid var(--accent); min-width: 240px; box-shadow: 0 0 20px rgba(251,191,36,0.1); backdrop-filter: blur(5px);}
 
         @media (hover: hover) {
-            .btn-primary:hover { transform: translateY(-5px) scale(1.02); box-shadow: var(--primary-glow); border-color: white; }
+            .btn-primary:hover { transform: translateY(-5px); box-shadow: var(--primary-glow); border-color: white; }
             .btn-discord:hover { background: var(--accent); color: #000; box-shadow: var(--accent-glow); transform: translateY(-5px); }
         }
-        .btn:active { transform: scale(0.96); }
 
-        /* --- SERVER STATS --- */
+        /* --- SERVER STATS (GLITCH FIXED) --- */
         .stats-container {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px;
-            max-width: 1000px; margin: -60px auto 80px auto; position: relative; z-index: 10; padding: 0 20px;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;
+            max-width: 1100px; margin: -80px auto 80px auto; /* FIX: Restored overlap safely */
+            position: relative; z-index: 20; padding: 0 20px;
         }
-        .stat-box { text-align: center; padding: 30px 20px; border-top: 1px solid rgba(251,191,36,0.2); background: rgba(10,15,22,0.8); }
+        .stat-box { text-align: center; padding: 35px 20px; background: rgba(15, 20, 30, 0.85); border-top: 2px solid var(--accent); border-radius: 16px; backdrop-filter: blur(10px); box-shadow: 0 15px 35px rgba(0,0,0,0.5); transition: 0.4s; }
         .stat-box h3 { font-size: clamp(2rem, 4vw, 2.8rem); color: var(--accent); margin-bottom: 5px; text-shadow: var(--accent-glow); line-height: 1; }
-        .stat-box p { color: var(--text-dim); font-size: 0.85rem; font-weight: 700; letter-spacing: 2px; margin: 0; }
+        .stat-box p { color: var(--text-dim); font-size: 0.9rem; font-weight: 800; letter-spacing: 2px; margin: 0; }
         
-        @media (hover: hover) { .stat-box:hover { transform: translateY(-5px); border-color: var(--accent); } }
+        @media (hover: hover) { .stat-box:hover { transform: translateY(-10px); background: rgba(20, 25, 35, 0.95); border-color: var(--primary); box-shadow: var(--primary-glow); } }
 
         /* --- SECTION LAYOUTS --- */
         .section-container { padding: 80px 5%; text-align: center; position: relative; }
@@ -175,7 +184,7 @@
 
         /* --- FEATURES GRID --- */
         .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; }
-        .feature-card { padding: 40px 30px; text-align: left; display: flex; flex-direction: column; }
+        .feature-card { padding: 40px 30px; text-align: left; display: flex; flex-direction: column; background: linear-gradient(145deg, rgba(20, 25, 35, 0.6), rgba(10, 15, 22, 0.8)); }
         .feature-icon-wrapper { width: 70px; height: 70px; background: rgba(16,185,129,0.1); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; margin-bottom: 25px; border: 1px solid rgba(16,185,129,0.3); transition: 0.4s; }
         .feature-card h3 { font-size: 1.5rem; margin-bottom: 15px; color: white; letter-spacing: 1px; }
         .feature-card p { color: var(--text-dim); font-size: 1rem; margin: 0; line-height: 1.7; }
@@ -185,62 +194,105 @@
             .feature-card:hover .feature-icon-wrapper { background: var(--primary); color: white; transform: rotate(-10deg) scale(1.1); }
         }
 
-        /* --- ECONOMY & POINTS (NEW) --- */
-        .economy-banner { background: linear-gradient(135deg, rgba(251,191,36,0.1), rgba(16,185,129,0.1)); border: 1px solid var(--accent); padding: 40px; border-radius: 20px; max-width: 900px; margin: 0 auto 60px auto; text-align: left; box-shadow: var(--accent-glow); display: flex; align-items: center; gap: 30px; flex-wrap: wrap; }
-        .eco-icon { font-size: 4rem; filter: drop-shadow(0 0 15px rgba(251,191,36,0.5)); }
+        /* --- ECONOMY & POINTS --- */
+        .economy-banner { background: linear-gradient(135deg, rgba(251,191,36,0.15), rgba(16,185,129,0.15)); border: 1px solid var(--accent); padding: 40px; border-radius: 20px; max-width: 900px; margin: 0 auto 60px auto; text-align: left; box-shadow: var(--accent-glow); display: flex; align-items: center; gap: 30px; flex-wrap: wrap; }
+        .eco-icon { font-size: 4.5rem; filter: drop-shadow(0 0 20px rgba(251,191,36,0.6)); animation: float 4s ease-in-out infinite;}
         .eco-text h3 { font-size: 1.8rem; color: white; margin-bottom: 10px; }
         .eco-text p { color: var(--text-dim); font-size: 1rem; line-height: 1.6; margin-bottom: 15px; }
-        .eco-rate { display: inline-block; background: rgba(0,0,0,0.5); padding: 8px 20px; border-radius: 8px; color: var(--accent); font-weight: bold; border: 1px solid rgba(251,191,36,0.3); }
+        .eco-rate { display: inline-block; background: rgba(0,0,0,0.6); padding: 10px 24px; border-radius: 8px; color: var(--accent); font-weight: 800; border: 1px solid var(--accent); font-size: 1.1rem; }
 
-        /* --- STORE SECTION --- */
-        .store-bg { background: radial-gradient(circle at center, #0e1621 0%, var(--bg-deep) 100%); }
-        .store-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; max-width: 1100px; margin: 0 auto; align-items: stretch; }
+        /* --- NEW: RANKS GUI TABAHI --- */
+        .store-bg { background: radial-gradient(circle at center, #0c121a 0%, var(--bg-deep) 100%); }
+        .store-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 35px; max-width: 1200px; margin: 0 auto; align-items: stretch; }
         
-        .rank-card { padding: 50px 30px; text-align: center; display: flex; flex-direction: column; border-top: 4px solid var(--primary); }
+        .rank-card { 
+            padding: 50px 35px; text-align: center; display: flex; flex-direction: column; 
+            background: linear-gradient(180deg, rgba(30, 40, 50, 0.4) 0%, rgba(10, 15, 20, 0.8) 100%);
+            border: 1px solid rgba(255,255,255,0.1); border-top: 4px solid #3b82f6; 
+            border-radius: 24px; position: relative; overflow: hidden; transition: 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        
         .rank-card.mvp { border-top-color: var(--accent); }
-        .rank-card.elite { border-top-color: #ef4444; background: linear-gradient(180deg, rgba(239,68,68,0.1) 0%, rgba(0,0,0,0) 100%); border: 1px solid rgba(239,68,68,0.4); transform: scale(1.05); z-index: 2; box-shadow: 0 10px 40px rgba(239,68,68,0.2); }
         
-        .rank-card h3 { font-size: 2.2rem; margin-bottom: 5px; letter-spacing: 2px; }
-        .rank-card .price { font-size: 1.2rem; color: var(--accent); font-weight: 800; margin-bottom: 25px; }
+        .rank-card.elite { 
+            border-top: none;
+            background: linear-gradient(180deg, rgba(239,68,68,0.15) 0%, rgba(10,15,20,0.9) 100%); 
+            border: 2px solid var(--elite-color); 
+            transform: scale(1.05); z-index: 2; 
+            animation: pulse-border 3s infinite;
+        }
+
+        .rank-card::before {
+            content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.1), transparent);
+            transform: skewX(-20deg); transition: 0.7s;
+        }
+
+        @media (hover: hover) {
+            .rank-card:hover { transform: translateY(-15px); box-shadow: 0 20px 40px rgba(0,0,0,0.8); border-color: rgba(255,255,255,0.3); }
+            .rank-card:hover::before { left: 200%; }
+            .rank-card.elite:hover { transform: scale(1.08) translateY(-15px); }
+        }
+
+        .rank-badge { position: absolute; top: 20px; right: -35px; background: var(--elite-color); color: white; padding: 5px 40px; font-weight: 900; font-size: 0.8rem; transform: rotate(45deg); box-shadow: 0 5px 15px rgba(0,0,0,0.5); letter-spacing: 2px;}
+
+        .rank-icon { font-size: 3.5rem; margin-bottom: 15px; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.5));}
+        .rank-card h3 { font-size: 2.2rem; margin-bottom: 5px; letter-spacing: 2px; color: white;}
+        .rank-card.elite h3 { color: var(--elite-color); text-shadow: var(--elite-glow); }
+        
+        .rank-card .price { font-size: 1.4rem; color: var(--accent); font-weight: 900; margin-bottom: 30px; background: rgba(0,0,0,0.3); padding: 5px 15px; border-radius: 8px; display: inline-block;}
         
         .rank-perks { list-style: none; margin: 0 0 40px 0; padding: 0; text-align: left; flex-grow: 1; }
-        .rank-perks li { margin-bottom: 15px; font-size: 0.95rem; color: #cbd5e1; display: flex; align-items: center; gap: 12px; font-weight: 500; }
-        .rank-perks li::before { content: '✦'; color: var(--accent); font-size: 1.2rem; }
+        .rank-perks li { margin-bottom: 15px; font-size: 1rem; color: #e2e8f0; display: flex; align-items: flex-start; gap: 12px; font-weight: 500; }
+        .rank-perks li::before { content: '✦'; color: var(--accent); font-size: 1.3rem; line-height: 1; text-shadow: 0 0 10px rgba(251,191,36,0.5);}
 
-        /* Crate Keys Section */
-        .crate-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; max-width: 1000px; margin: 50px auto 0 auto; }
-        .crate-card { padding: 30px; text-align: center; border-radius: 16px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); }
-        .crate-card h4 { font-size: 1.5rem; color: white; margin-bottom: 15px; display: flex; justify-content: center; align-items: center; gap: 10px;}
-        .key-price { font-size: 1rem; color: var(--text-dim); margin-bottom: 8px; font-weight: 600; }
-        .key-price span { color: var(--primary); }
+        /* --- NEW: CRATES GUI TABAHI --- */
+        .crate-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1100px; margin: 50px auto 0 auto; }
+        .crate-card { 
+            padding: 40px 30px; text-align: center; border-radius: 20px; 
+            background: linear-gradient(135deg, rgba(251,191,36,0.05), rgba(0,0,0,0.4)); 
+            border: 1px solid rgba(251,191,36,0.2); transition: 0.4s;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+        }
+        
+        @media (hover: hover) {
+            .crate-card:hover { transform: translateY(-10px) scale(1.03); border-color: var(--accent); box-shadow: var(--accent-glow); background: linear-gradient(135deg, rgba(251,191,36,0.1), rgba(0,0,0,0.6));}
+        }
+
+        .crate-card h4 { font-size: 1.8rem; color: white; margin-bottom: 25px; display: flex; justify-content: center; align-items: center; gap: 15px; text-shadow: 0 2px 10px rgba(0,0,0,0.8);}
+        .crate-card h4 span { font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(251,191,36,0.8)); animation: float 3s ease-in-out infinite;}
+        
+        .key-price-box { background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 15px; margin-bottom: 10px;}
+        .key-price { font-size: 1.1rem; color: var(--text-light); font-weight: 700; display: flex; justify-content: space-between; align-items: center;}
+        .key-price span { color: var(--accent); font-weight: 900; font-size: 1.2rem;}
 
         /* --- STAFF SECTION --- */
-        .staff-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; max-width: 1100px; margin: 0 auto; }
+        .staff-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 50px; max-width: 1100px; margin: 0 auto; }
         .staff-card { padding: 40px 20px; display: flex; flex-direction: column; align-items: center; text-align: center; }
-        .staff-skin { height: 240px; width: auto; margin-bottom: 25px; filter: drop-shadow(0 20px 25px rgba(0,0,0,0.8)); transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .staff-skin { height: 260px; width: auto; margin-bottom: 25px; filter: drop-shadow(0 20px 25px rgba(0,0,0,0.8)); transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         .staff-card:hover .staff-skin { transform: scale(1.15) translateY(-10px); filter: drop-shadow(0 25px 30px rgba(16,185,129,0.5)); }
         
-        .staff-card h4 { font-size: 1.6rem; color: white; margin-bottom: 10px; text-transform: none;}
-        .staff-role { padding: 6px 20px; border-radius: 30px; font-size: 0.85rem; font-weight: 900; letter-spacing: 2px; }
+        .staff-card h4 { font-size: 1.8rem; color: white; margin-bottom: 12px; text-transform: none; letter-spacing: 1px;}
+        .staff-role { padding: 8px 24px; border-radius: 30px; font-size: 0.9rem; font-weight: 900; letter-spacing: 2px; text-transform: uppercase;}
         
-        .staff-card.owner .staff-role { background: rgba(239,68,68,0.15); color: #ef4444; border: 1px solid rgba(239,68,68,0.4); box-shadow: 0 0 15px rgba(239,68,68,0.2); }
-        .staff-card.manager .staff-role { background: rgba(251,191,36,0.15); color: var(--accent); border: 1px solid rgba(251,191,36,0.4); }
-        .staff-card.admin .staff-role { background: rgba(16,185,129,0.15); color: var(--primary); border: 1px solid rgba(16,185,129,0.4); }
+        .staff-card.owner .staff-role { background: rgba(239,68,68,0.15); color: #ef4444; border: 1px solid rgba(239,68,68,0.4); box-shadow: 0 0 20px rgba(239,68,68,0.3); }
+        .staff-card.manager .staff-role { background: rgba(251,191,36,0.15); color: var(--accent); border: 1px solid rgba(251,191,36,0.4); box-shadow: 0 0 20px rgba(251,191,36,0.2);}
+        .staff-card.admin .staff-role { background: rgba(16,185,129,0.15); color: var(--primary); border: 1px solid rgba(16,185,129,0.4); box-shadow: 0 0 20px rgba(16,185,129,0.2);}
 
         /* --- VOTE CTA SECTION --- */
-        .vote-cta { background: linear-gradient(135deg, rgba(10,15,22,0.9), rgba(5,150,105,0.2)); border-top: 1px solid var(--primary); border-bottom: 1px solid var(--primary); padding: 80px 5%; box-shadow: inset 0 0 50px rgba(16,185,129,0.1); }
-        .vote-cta h2 { font-size: clamp(2rem, 4vw, 3.5rem); margin-bottom: 15px; text-shadow: var(--primary-glow); }
-        .btn-vote { background: var(--accent); color: #000; padding: 18px 50px; font-size: 1.2rem; font-weight: 900; text-transform: uppercase; text-decoration: none; border-radius: 12px; transition: var(--transition); display: inline-flex; align-items: center; gap: 10px; margin-top: 20px; box-shadow: var(--accent-glow); }
+        .vote-cta { background: linear-gradient(135deg, rgba(10,15,22,0.9), rgba(5,150,105,0.2)); border-top: 1px solid var(--primary); border-bottom: 1px solid var(--primary); padding: 100px 5%; box-shadow: inset 0 0 80px rgba(16,185,129,0.1); }
+        .vote-cta h2 { font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 20px; text-shadow: var(--primary-glow); }
+        .btn-vote { background: var(--accent); color: #000; padding: 20px 60px; font-size: 1.3rem; font-weight: 900; text-transform: uppercase; text-decoration: none; border-radius: 12px; transition: var(--transition); display: inline-flex; align-items: center; gap: 15px; margin-top: 30px; box-shadow: var(--accent-glow); }
         @media (hover: hover) { .btn-vote:hover { background: white; transform: translateY(-5px) scale(1.05); } }
 
         /* --- TOAST NOTIFICATION --- */
-        #toast { visibility: hidden; width: 90%; max-width: 400px; background: rgba(16,185,129,0.95); backdrop-filter: blur(10px); color: white; text-align: center; border-radius: 12px; padding: 20px; position: fixed; z-index: 9999; left: 50%; bottom: -100px; transform: translateX(-50%); font-weight: 800; box-shadow: 0 10px 30px rgba(0,0,0,0.7); opacity: 0; transition: 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55); font-size: 1.1rem; border: 1px solid rgba(255,255,255,0.2); text-transform: uppercase; }
+        #toast { visibility: hidden; width: 90%; max-width: 400px; background: rgba(16,185,129,0.95); backdrop-filter: blur(10px); color: white; text-align: center; border-radius: 12px; padding: 20px; position: fixed; z-index: 9999; left: 50%; bottom: -100px; transform: translateX(-50%); font-weight: 800; box-shadow: 0 10px 40px rgba(0,0,0,0.8); opacity: 0; transition: 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55); font-size: 1.1rem; border: 1px solid rgba(255,255,255,0.3); text-transform: uppercase; letter-spacing: 1px;}
         #toast.show { visibility: visible; opacity: 1; bottom: 40px; }
 
         /* --- FOOTER --- */
         footer { background: #05080c; padding: 60px 20px; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); }
-        .footer-logo { font-size: 2rem; font-weight: 900; margin-bottom: 15px; color: #475569; letter-spacing: 5px; }
-        .footer-text { color: #334155; font-size: 0.9rem; font-weight: 500; }
+        .footer-logo { font-size: 2.2rem; font-weight: 900; margin-bottom: 15px; color: #475569; letter-spacing: 5px; }
+        .footer-text { color: #334155; font-size: 0.95rem; font-weight: 500; }
 
         /* --- MOBILE RESPONSIVENESS --- */
         @media screen and (max-width: 1024px) {
@@ -257,13 +309,14 @@
             .nav-links a { margin: 15px 0; font-size: 1.1rem; width: 100%; text-align: center; }
             .nav-links .highlight-btn { width: 85%; margin: 15px auto 5px auto; display: block; text-align: center; }
             
-            .hero { padding-top: 120px; }
+            .hero { padding-top: 150px; padding-bottom: 120px; }
             .btn-group { flex-direction: column; width: 100%; padding: 0 10px; }
             .btn { width: 100%; min-width: unset; padding: 18px; }
             
-            .stats-container { margin-top: 30px; grid-template-columns: 1fr; padding: 0 15px; }
+            .stats-container { margin-top: -50px; grid-template-columns: 1fr; padding: 0 15px; }
             .section-container { padding: 80px 20px; }
             .economy-banner { padding: 30px 20px; text-align: center; justify-content: center; }
+            .rank-badge { right: 0; transform: rotate(0deg); top: 0; border-radius: 0 24px 0 24px;}
         }
     </style>
 </head>
@@ -300,7 +353,7 @@
                     <span style="font-size: 1.2rem; letter-spacing: 2px;">bittusmp.play.hosting</span>
                     <span id="player-count" style="font-size: 0.8rem; color: #a7f3d0; margin-top: 5px; font-weight: 700; text-transform: none; letter-spacing: 0.5px;">🟢 Pinging Network...</span>
                 </button>
-                <a href="#store" class="btn btn-discord">
+                <a href="#store" class="btn btn-discord" onclick="smoothScroll(event, 'store')">
                     🛒 View Webstore
                 </a>
             </div>
@@ -308,15 +361,15 @@
     </section>
 
     <div class="stats-container reveal">
-        <div class="stat-box glass-panel">
+        <div class="stat-box">
             <h3>24/7</h3>
             <p>NETWORK UPTIME</p>
         </div>
-        <div class="stat-box glass-panel">
+        <div class="stat-box">
             <h3>12GB</h3>
             <p>DEDICATED RAM</p>
         </div>
-        <div class="stat-box glass-panel">
+        <div class="stat-box">
             <h3>5 MS</h3>
             <p>COMBAT LATENCY</p>
         </div>
@@ -375,13 +428,14 @@
                 <p>We use a secure in-game currency system! Purchase points via a Discord Ticket using real money (UPI, PayPal, etc.), and then spend them instantly in-game using <strong>/pointsshop</strong> or <strong>/ranks</strong>!</p>
                 <div class="eco-rate">100 Points = ₹100 / $1</div>
             </div>
-            <a href="https://discord.gg/9jfw4jfBkA" target="_blank" class="btn btn-primary" style="min-width: 200px; padding: 15px 30px;">Open Purchase Ticket</a>
+            <a href="https://discord.gg/9jfw4jfBkA" target="_blank" class="btn btn-primary" style="min-width: 200px; padding: 15px 30px; box-shadow: var(--accent-glow);">Open Purchase Ticket</a>
         </div>
 
-        <h3 class="reveal" style="font-size: 2rem; margin-bottom: 40px; color: white;">👑 Server Ranks</h3>
+        <h3 class="reveal" style="font-size: 2.5rem; margin-bottom: 50px; color: white; text-shadow: 0 5px 15px rgba(0,0,0,0.8);">👑 SERVER RANKS</h3>
         <div class="store-grid">
-            <div class="rank-card glass-panel reveal">
-                <h3 style="color: #cbd5e1;">VIP Rank</h3>
+            <div class="rank-card reveal">
+                <div class="rank-icon">🔴</div>
+                <h3 style="color: #60a5fa;">VIP Rank</h3>
                 <div class="price">100 Points (₹100 / $1)</div>
                 <ul class="rank-perks">
                     <li>Custom VIP Chat Tag & Name Color</li>
@@ -392,7 +446,8 @@
                 </ul>
             </div>
 
-            <div class="rank-card glass-panel mvp reveal">
+            <div class="rank-card mvp reveal">
+                <div class="rank-icon">🟡</div>
                 <h3 style="color: var(--accent);">MVP Rank</h3>
                 <div class="price">200 Points (₹180 / $2)</div>
                 <ul class="rank-perks">
@@ -404,8 +459,10 @@
                 </ul>
             </div>
 
-            <div class="rank-card glass-panel elite reveal">
-                <h3 style="color: #ef4444; text-shadow: 0 0 15px rgba(239,68,68,0.5);">ELITE Rank</h3>
+            <div class="rank-card elite reveal">
+                <div class="rank-badge">GOD TIER</div>
+                <div class="rank-icon">🟢</div>
+                <h3 style="color: var(--elite-color);">ELITE Rank</h3>
                 <div class="price" style="color: #fca5a5;">500 Points (₹400 / $5)</div>
                 <ul class="rank-perks">
                     <li>Glowing Elite Chat Identity</li>
@@ -418,22 +475,36 @@
             </div>
         </div>
 
-        <h3 class="reveal" style="font-size: 2rem; margin-top: 80px; margin-bottom: 40px; color: white;">🗝️ Crate Keys</h3>
+        <h3 class="reveal" style="font-size: 2.5rem; margin-top: 100px; margin-bottom: 40px; color: white; text-shadow: 0 5px 15px rgba(0,0,0,0.8);">🗝️ CRATE KEYS</h3>
         <div class="crate-grid reveal">
             <div class="crate-card">
-                <h4>🟡 Vote Keys</h4>
-                <div class="key-price">1x = <span>40 Points</span></div>
-                <div class="key-price">12x = <span>400 Points</span></div>
+                <h4><span>🟡</span> Vote Keys</h4>
+                <div class="key-price-box">
+                    <div class="key-price">1x Key <span>40 Points</span></div>
+                </div>
+                <div class="key-price-box">
+                    <div class="key-price">12x Keys <span>400 Points</span></div>
+                </div>
             </div>
+            
             <div class="crate-card">
-                <h4>⚪ Wild Keys</h4>
-                <div class="key-price">1x = <span>100 Points</span></div>
-                <div class="key-price">12x = <span>1000 Points</span></div>
+                <h4><span>⚪</span> Wild Keys</h4>
+                <div class="key-price-box">
+                    <div class="key-price">1x Key <span>100 Points</span></div>
+                </div>
+                <div class="key-price-box">
+                    <div class="key-price">12x Keys <span>1000 Points</span></div>
+                </div>
             </div>
+
             <div class="crate-card">
-                <h4>🟠 Insane Keys</h4>
-                <div class="key-price">1x = <span>200 Points</span></div>
-                <div class="key-price">12x = <span>2000 Points</span></div>
+                <h4><span>🟠</span> Insane Keys</h4>
+                <div class="key-price-box">
+                    <div class="key-price">1x Key <span>200 Points</span></div>
+                </div>
+                <div class="key-price-box">
+                    <div class="key-price">12x Keys <span>2000 Points</span></div>
+                </div>
             </div>
         </div>
     </section>
@@ -468,7 +539,7 @@
     <section class="section-container vote-cta">
         <div class="reveal">
             <h2>Claim Your Free Rewards</h2>
-            <p style="color: #cbd5e1; font-size: 1.2rem; max-width: 700px; margin: 0 auto;">Help us grow the network! Vote for BittuSMP daily on TopG to boost our ranking. You will instantly receive free in-game Cash, Vote Keys, and XP!</p>
+            <p style="color: #cbd5e1; font-size: 1.3rem; max-width: 800px; margin: 0 auto; line-height: 1.8;">Help us grow the network! Vote for BittuSMP daily on TopG to boost our ranking. You will instantly receive free in-game Cash, Vote Keys, and XP!</p>
             <a href="https://topg.org/minecraft-servers/server-679412" target="_blank" class="btn-vote">
                 🗳️ Click Here to Vote Now
             </a>
@@ -487,13 +558,13 @@
         // High-Tier Ambient Fireflies (Mixed Emerald and Gold)
         particlesJS('particles-js', {
             "particles": {
-                "number": { "value": 60, "density": { "enable": true, "value_area": 1000 } },
+                "number": { "value": 70, "density": { "enable": true, "value_area": 1000 } },
                 "color": { "value": ["#10b981", "#fbbf24", "#34d399", "#f59e0b"] },
                 "shape": { "type": "circle" },
                 "opacity": { "value": 0.8, "random": true, "anim": { "enable": true, "speed": 1, "opacity_min": 0.2, "sync": false } },
                 "size": { "value": 4, "random": true, "anim": { "enable": true, "speed": 2, "size_min": 1, "sync": false } },
                 "line_linked": { "enable": false },
-                "move": { "enable": true, "speed": 1, "direction": "top", "random": true, "straight": false, "out_mode": "out", "bounce": false }
+                "move": { "enable": true, "speed": 1.5, "direction": "top", "random": true, "straight": false, "out_mode": "out", "bounce": false }
             },
             "interactivity": { 
                 "detect_on": "canvas", 
@@ -509,6 +580,12 @@
             if (window.scrollY > 50) { nav.classList.add('scrolled'); } 
             else { nav.classList.remove('scrolled'); }
         });
+
+        // Smooth Scroll for internal links
+        function smoothScroll(e, targetId) {
+            e.preventDefault();
+            document.getElementById(targetId).scrollIntoView({ behavior: 'smooth' });
+        }
 
         // Mobile Menu
         function toggleMenu() { document.getElementById("navLinks").classList.toggle("active"); }
